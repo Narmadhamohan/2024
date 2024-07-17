@@ -1,0 +1,88 @@
+Topic:
+
+Passionate, Patience, Say what you need
+1. Analyse the trainees, Analyse the audience. What's their background, what's their need
+Talk to top mgmt. Take accoun t of their requirment.
+
+2. Design and Develop of the entire package of training. 
+Training Aids:  Slides, Role plays, ACtivities, Stores?
+
+3. Training Adults. They have different requriemetns. What they want to get out of it?
+	Principles of Adult learning.
+
+4. Amalgamation of learning styles. ppt, Activites, GaES, rOLE PLAYS, cASE STUDIES ETC.
+5. iMPLEMETNATION: Query handling, presentation, PMT club.
+
+
+U1:
+	
+-- how to connect
+-- how to execute -> GO, GO 2, ctrl + E for , F5 for full-length
+-- create two tables  - data types, alter table to add captain, insert without auto
+-- dbo or entire path, function, 
+-- CREATE SCHEMA CHAPTERS;  Show schema under expand db -> security -> sxhemas
+-- no "", use ''
+-- after conection disconnect, say usedb
+
+
+				DAta types:
+				INT, STRING, DATETIME, BIT
+			
+				NVARCHAR(3): Variable-length Unicode, suitable for short strings in multiple languages.
+							Storage: Each character can occupy up to 2 bytes.
+
+				VARCHAR(3): Variable-length non-Unicode, suitable for short strings in a single language.
+							Storage: Each character typically occupies 1 byte.
+
+				CHAR(3): Fixed-length non-Unicode, suitable for fixed-length fields where the length is consistent.
+						Storage: Each character typically occupies 1 byte
+						
+						Only to Show:  data  -> 1 Factor -> That is normalization -> EXECUTE cmd-> About the tool ->
+						create DB -> 
+						Create table simple syntax -> GO uses -> dbo schema uses
+						-> Data type -> DROP Table -> DROP DB -> Alter table -> Sample Insert
+						DROP TABLE example. same similar way for DROP DB
+						Datatypes - > tell them to create one. Remaining you just show it.
+						Tell same is gong to happen for most of the other statically typed languages.
+						
+						
+						Alter table.  Show change in data type, alter to ADD new column, alter - NO rename cmd - so, use special procedures.
+						
+						
+						Last line/Trim line: Schema creation. say it will be mostly created once for an app.
+						
+						
+
+U2:
+
+
+U3:
+U4:
+U5:
+
+
+
+U1:
+
+	Concepts: Slides
+	Action: 
+		File names:
+		Scripts Use:
+	Assignments: 
+
+U2:
+
+	Concepts: Slides
+	Action: 
+		File names:
+		Scripts Use:
+	Assignments:
+
+U3:
+
+	Concepts: Slides
+	Action: 
+		File names:
+		Scripts Use:
+	Assignments:
+	
