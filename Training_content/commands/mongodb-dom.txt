@@ -1,0 +1,137 @@
+use companyDB
+
+
+use companyDB
+
+Atlas atlas-578cqi-shard-0 [primary] sample_Airbnb> db.getSiblingDB("sample_airbnb").getCollection("listingsAndReviews").find({_id: "10021707"})      
+
+db.employees.insertOne(
+
+ {
+    employee: "Samantha Brown",
+    username: "samb",
+    rating: 4.2,
+    date_joined: new Date("2021-07-19")
+  }
+ )
+db.employees.insertMany([
+  {
+    employee: "John Doe",
+    username: "johnd",
+    rating: 4.5,
+    date_joined: new Date("2020-01-15")
+  },
+  {
+    employee: "Arun Smith",
+    username: "aruns",
+    rating: 4.8,
+    date_joined: new Date("2019-03-22")
+  },
+ 
+])
+
+db.employees.updateOne(
+  { username: "aruns" }, // Filter: Find document with username 'johnd'
+  { $set: { rating: 4.9 } } // Update: Set rating to 4.9
+)
+db.employees.updateOne(
+  { username: "aruns" }, // Filter: Find document with username 'johnd'
+  { $set: { rating: 4.9,     date_joined: new Date("2019-03-22") } } 
+)
+db.employees.updateMany(
+  { rating: { $lt: 4.5 } }, // Filter: Find documents with rating less than 4.5
+  { $set: { rating: 4.5 } } // Update: Set rating to 4.5
+)
+
+
+db.employees.find().pretty()
+db.employees.find({employee: "Arun Smith" }).pretty()
+
+ db.restaurant.replaceOne(
+      { "name" : "Pizza Rat's Pizzaria" },
+      { "_id": 4, "name" : "Pizza Rat's Pizzaria", "Borough" : "Manhattan", "violations" : 8 },
+      { upsert: true }
+   );
+   db.collection.findOneAndReplace().
+
+db.collection.findOneAndUpdate().
+
+db.collection.findAndModify().
+
+db.collection.bulkWrite().
+
+See the individual reference pages for t
+
+***************** Example of embedded docum***************************
+{
+    item: 'journal',
+    qty: 25,
+    size: { h: 14, w: 21, uom: 'cm' },
+    status: 'A'
+  }
+  
+db.collection('inventory').find({
+  'size.h': { $lt: 15 },
+  
+  })
+  
+
+ ***************************************************
+// Base one docu , upsert - new record with non-existing archimedes, array with push
+db.u2employees.insertMany([
+  {
+    employee: "John Doe",
+    username: "johnd",
+    projects: []
+  },
+  {
+    employee: "Arun Smith",
+    username: "aruns",
+    rating: 4.8,
+  },
+ 
+])
+**************************************************
+db.u2employees.updateOne(
+{_id: ObjectId("669a10812e474454d9b42dea")},
+{$set: {city: "Chennai"}}
+)
+db.u2employees.updateOne(
+{name: "Archimedes"},
+{$set: {city: "Chennai"}},
+{upsert:true}
+)
+db.u2employees.updateOne(
+{employee: "John Doe"},
+{$push: {projects: "Fintech"}}
+
+)
+
+**********************Findand modify***************************
+db.u2employees.updateOne(
+{name: "Archimedes"},
+{$set: {city: "Chennai", downloads:1234}},
+
+{upsert:true}
+)
+
+db.u2employees.findAndModify({
+query: {name: "Archimedes"},
+update: {$inc: {downloads:1}},
+new: true
+})
+
+
+************************************** delete example*****************
+
+db.u2employees.updateOne(
+{name: "oldNamed"},
+{$set: {city: "Chennai"}},
+{upsert:true}
+)
+
+
+db.podcasts.deleteOne({ _id: Objectid("6282c9862acb966e76bbf20a") })
+db.podcasts.deleteMany({category: “crime”})
+
+Replaced a single document by using db.collection.replaceOne().
