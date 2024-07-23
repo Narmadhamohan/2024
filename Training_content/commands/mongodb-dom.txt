@@ -135,3 +135,21 @@ db.podcasts.deleteOne({ _id: Objectid("6282c9862acb966e76bbf20a") })
 db.podcasts.deleteMany({category: “crime”})
 
 Replaced a single document by using db.collection.replaceOne().
+
+
+
+
+Index
+
+db.customers.explain().find({
+  birthdate: {
+    $gt:ISODate("1995-08-01")
+    }
+  })
+db.customers.explain().find({
+  birthdate: {
+    $gt:ISODate("1995-08-01")
+    }
+  }).sort({
+    email:1
+    })

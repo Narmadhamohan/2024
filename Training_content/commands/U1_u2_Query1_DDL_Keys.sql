@@ -1,4 +1,4 @@
-﻿CREATE DATABASE TestData;
+﻿CREATE DATABASE ;
 GO
 use TestData;
 GO 1
@@ -65,6 +65,12 @@ Alter Table u2_stadium
 ADD test INT;
 -- Add new column
 EXEC sp_rename 'u2_stadium.StadiumsID', 'StadiumID', 'COLUMN';
+
+
+-- check script
+create table u1_employeeSalary (id int,salary int, check (salary>50));
+insert into u1_employeeSalary(id,salary) values(2,'5');
+
 
 -- **************************************************
 

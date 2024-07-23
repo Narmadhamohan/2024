@@ -1,0 +1,81 @@
+3 days - DB
+
+1st day: 									"What is data?
+											How big is Big Data?
+											Data Structures
+											Why we need DBMS?
+											N – Tier Architecture
+											Data Diagrams"
+											"Aggregate and Atomicity
+											Security and Accessibility
+											Data Encryption and Storage - Basic
+
+											MSSQL Install and Configure , 
+											SQL, NOSQL, Applications, Embedded"
+											"DDL
+											Schema
+											Types
+											Creating and Altering,
+														Database
+														Tables
+														Views
+														Columns"
+											"DML
+											"Multiple Tables: Normalization
+											Indexes & Constraints
+											Getting data from tables
+											Getting data from relations
+											Most important and frequently used query- index
+												
+											OLAP and OLTP - basic
+											"Aggregate Functions
+											Filters - where - between , like, <, >, in
+												Operators"  - Arithmetic, comparison, logicaal - and, any, all , between, like, exists, not, or
+												and,or,not
+											Data Diagrams"
+
+										
+											
+											Joins
+											Alias"
+											"Joins vs Sub Queries
+											
+											
+
+2nd day:   Correlation and Non-Correlation,  "Introduction to TSQL, Procedures, Functions, Triggers, Indices
+			Comparision input on TSQL with PL/SQL"
+			OLAP and OLTP
+				Boolean Algebra
+				Relational Algebra
+				Data Encryption and Storage
+
+			Additional - to_char, to_number
+			NO-SQL DB - Mongo DB - Basic queries - documents, collections, 
+								doubt - indexes, Installation & Set up, Robo3t
+								doubt - NO-SQL DB - Mongo DB - aggregate functions, aggregation pipeine queries, embedded documents 
+
+3rd day: 		NO-SQL DB - Mongo DB - indexes, aggregate functions, aggregation pipeine queries, embedded documents 
+				Internet and World of Web
+				HTML
+
+
+Create a Database mgmt system using oltp for customer placing order, customer details, order details, product details.
+
+
+
+										2 days  - Fornt end
+
+4th day:			Project support using oltp and	CSS
+								Bootstrap 
+								JavaScript
+5th day:   Project support for project 2 and assessment "Agile Methodology 
+and 
+BA & QA"
+Git, MicroServices, Dockerization
+
+6th day: assignment and Java
+7th day:  Java
+8th day: Java
+9th day: Java project  -  Python
+10th day: python and DS
+11th day : Python and DS

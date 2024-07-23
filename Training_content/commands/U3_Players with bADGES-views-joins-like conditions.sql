@@ -103,6 +103,46 @@ select top 2 * from u4_Players where score>=200 and score<=300
 select * from u4_Players order by score desc
 Select * from u4_Players order by score asc
 
+-- CASE
+
+create table case_players(
+ID INT PRIMARY KEY IDENTITY(1,1),
+FirstName VARCHAR(50),
+Score INT
+)
+
+INSERT INTO case_players(FirstName, Score)
+VALUES('DIJO', 125),('Jose', 20),('Vipin',30 ),('Das', null)
+
+SELECT FirstName, 
+CASE 
+	WHEN score > 100 THEN 'You got a century'
+	WHEN score < 100 THEN 'You are growing'
+	ELSE 'Get a seat'
+END AS ScoreComment
+FROM case_players
+GO
+
+
+-- View
+CREATE VIEW PLAYER_FETCH AS
+SELECT firstname, score
+from case_players;
+GO
+Select * from PLAYER_FETCH;
+DROP VIEW PLAYER_FETCH;
+
+-- Index
+CREATE INDEX idx_firstname
+ON case_players (firstname);
+
+DROP INDEX case_players.idx_firstname;
+
+-- Exists
+SELECT FirstName
+from case_players casePlayer
+where exists (select firstname from case_players where score <
+100 and id =casePlayer.id )
 
 
 
@@ -167,14 +207,18 @@ Select players.FirstName, badge.Badge
 from u4_Players players RIGHT JOIN u4_Badge  badge
 ON  players.PlayerID = badge.PlayerID;
 
-Select players.FirstName, badge.Badge 
-from u4_Players players  , u4_Badge  badge
 
+
+-- INNER JOIN
 Select players.firstname as Players, captain.firstname as Captain
 FROM
 u4_Players players,
 u4_Players captain
 where players.captain = captain.PlayerID;
+
+-- caretsian sub product
+Select players.FirstName, badge.Badge 
+from u4_Players players  , u4_Badge  badge
 
 -- Correlated subquery
 Select * from u4_Players players
