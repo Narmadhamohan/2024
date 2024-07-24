@@ -79,3 +79,8 @@ Git, MicroServices, Dockerization
 9th day: Java project  -  Python
 10th day: python and DS
 11th day : Python and DS
+
+
+Use char when the sizes of the column data entries are consistent.
+Use varchar when the sizes of the column data entries vary considerably.
+Use varchar(max) when the sizes of the column data entries vary considerably, and the string length might exceed 8,000 bytes.

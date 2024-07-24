@@ -77,15 +77,7 @@ Select * from u4_Players;
 
 -- conditions
 
--- Subquery and condition
-select * from u4_Players where playerid=
-(Select PlayerID from u4_Players where firstname='dijo') ;
-select * from u4_Players where Captain=
-(Select PlayerID from u4_Players where firstname='dijo') ;
-select * from u4_Players where score
-not in (select max(score) from u4_Players)
-select * from u4_Players where score
- in (select max(score) from u4_Players)
+
 
 select * from u4_Players where city is not null;
 select * from u4_Players where captain is null;
@@ -97,7 +89,18 @@ select * from u4_Players where city ='Chennai';
 
 select * from u4_Players where score between 200 and 300;
 select * from u4_Players where score>=200 and score<=300
-select top 2 * from u4_Players where score>=200 and score<=300
+select top 2 * from u4_Players where score>=200 and score<=300 order by score asc
+
+-- Subquery and condition
+select * from u4_Players where playerid=
+(Select PlayerID from u4_Players where firstname='dijo') ;
+select * from u4_Players where Captain=
+(Select PlayerID from u4_Players where firstname='dijo') ;
+select * from u4_Players where score
+not in (select max(score) from u4_Players)
+select * from u4_Players where score
+ in (select max(score) from u4_Players)
+
 
 -- order by
 select * from u4_Players order by score desc
@@ -131,6 +134,44 @@ from case_players;
 GO
 Select * from PLAYER_FETCH;
 DROP VIEW PLAYER_FETCH;
+
+
+
+-- TCLS group roles
+CREATE ROLE SchemaAccessRole;
+CREATE ROLE DatabaseAccessRole;
+GRANT SELECT TO DatabaseAccessRole;
+GRANT INSERT TO DatabaseAccessRole;
+GRANT UPDATE TO DatabaseAccessRole;
+GRANT DELETE TO DatabaseAccessRole;
+GRANT EXECUTE TO DatabaseAccessRole;
+
+ALTER ROLE DatabaseAccessRole ADD MEMBER vikram;
+ALTER ROLE DatabaseAccessRole DROP MEMBER vikram;
+--
+-- TCL View group roles
+SELECT name 
+FROM sys.database_principals 
+WHERE name = 'vaibhav';
+CREATE LOGIN vaibhav WITH PASSWORD = 'abc';
+IF NOT EXISTS (SELECT * FROM sys.database_principals WHERE name = 'vaibhav')
+BEGIN
+    CREATE USER vaibhav FOR LOGIN vaibhav;
+END
+
+
+CREATE ROLE view_role;
+DROP ROLE view_role;
+GRANT SELECT ON PLAYER_FETCH TO view_role;
+ALTER ROLE view_role ADD MEMBER vikram;
+ALTER ROLE view_role ADD MEMBER vaibhav;
+
+-- REVOKE SELECT ON PLAYER_FETCH from view_role;
+ALTER ROLE view_role DROP MEMBER vikram;
+
+
+--
+
 
 -- Index
 CREATE INDEX idx_firstname
@@ -178,17 +219,17 @@ group by city;
 select city,count(1) from u4_Players 
 group by city;
 
-select city,count(1) from u4_Players where city is not null
+-- select city,count(1) from u4_Players where city is not null
 group by city;
 
-select city,count(1) from u4_Players where city is not null
-and score>=100
-group by city;
+-- select city,count(1) from u4_Players where city is not null
+-- and score>=100
+-- group by city;
 
 
-select city,count(1) from u4_Players where city is not null
-and score>=100
-group by city having count(1)=1;
+-- select city,count(1) from u4_Players where city is not null
+ -- and score>=100
+-- group by city having count(1)=1;
 
 select city,count(1),sum(score) from u4_Players where city is not null
 group by city
@@ -241,5 +282,93 @@ where city='Chennai' group by city;
  select * from u4_Players up where score in     
 (select max(score) from u4_Players 
 group by city)
+
+
+-- Addition
+SELECT 5 + 3 AS AdditionResult;
+
+-- Subtraction
+SELECT 5 - 3 AS SubtractionResult;
+
+-- Multiplication
+SELECT 5 * 3 AS MultiplicationResult;
+
+-- Division
+SELECT 10 / 2 AS DivisionResult;
+
+-- Modulus
+SELECT 10 % 3 AS ModulusResult;
+
+
+
+-- AND operator
+SELECT CASE WHEN 1 = 1 AND 2 = 2 THEN 'True' ELSE 'False' END AS AndResult;
+
+-- OR operator
+SELECT CASE WHEN 1 = 1 OR 2 = 3 THEN 'True' ELSE 'False' END AS OrResult;
+
+-- NOT operator
+SELECT CASE WHEN NOT (1 = 1) THEN 'True' ELSE 'False' END AS NotResult;
+
+
+-- 3. Relational Algebra
+-- selction, projection, union, join
+
+
+
+create table xx_team_a(playerid int,playername varchar(100),matchplayed int)
+
+create table xx_team_b(playerid int,playername varchar(100),matchplayed int)
+
+insert into xx_team_a(playerid,playername,matchplayed)
+values(1,'Dijo',6)
+
+insert into xx_team_a(playerid,playername,matchplayed)
+values(2,'Jose',4)
+
+insert into xx_team_a(playerid,playername,matchplayed)
+values(3,'Brian',70)
+
+
+
+insert into xx_team_b(playerid,playername,matchplayed)
+values(1,'Dijo',10)
+
+insert into xx_team_b(playerid,playername,matchplayed)
+values(2,'Jose',19)
+
+insert into xx_team_b(playerid,playername,matchplayed)
+values(4,'David',80)
+
+
+-- union
+select * from xx_team_a
+union
+select * from xx_team_b
+
+select playerid,playername from xx_team_a
+union
+select  playerid,playername from xx_team_b
+
+
+select playerid,playername from xx_team_a
+union all
+select  playerid,playername from xx_team_b
+
+
+-- intersect
+select playerid,playername from xx_team_a
+INTERSECT
+select  playerid,playername from xx_team_b;
+
+-- differnce
+select playerid from xx_team_a
+EXCEPT
+select  playerid from xx_team_b
+
+
+-- cartesian
+select * from xx_team_a a
+, xx_team_b b
 
 
