@@ -1,0 +1,27 @@
+-- self join , 
+
+db.employees.insertMany([
+  { _id: 1, employeeId: "E1", name: "Alice", reportsTo: null },
+  { _id: 2, employeeId: "E2", name: "Bob", reportsTo: "E1" },
+  { _id: 3, employeeId: "E3", name: "Charlie", reportsTo: "E1" },
+  { _id: 4, employeeId: "E4", name: "David", reportsTo: "E2" },
+  { _id: 5, employeeId: "E5", name: "Eve", reportsTo: "E2" }
+]);
+
+
+
+db.employees.aggregate([
+  {
+    $match: { employeeId: "E1" }
+  },
+  {
+    $graphLookup: {
+      from: "employees",
+      startWith: "$employeeId",
+      connectFromField: "employeeId",
+      connectToField: "reportsTo",
+      as: "reportingHierarchy"
+    }
+  }
+]);
+Finds Bob (E2) and Charlie (E3), who report to Alice (E1).

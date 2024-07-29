@@ -1,0 +1,78 @@
+If you want to create a CHECK constraint to ensure that the value in the Department column is always 'IT', you can do this at either the column level or the table level.
+
+Column-Level CHECK Constraint
+Here’s how to create a table with a column-level CHECK constraint that enforces that the Department column must always be 'IT':
+
+sql
+Copy code
+CREATE TABLE Employees (
+    EmployeeID INT PRIMARY KEY,
+    FirstName NVARCHAR(50),
+    LastName NVARCHAR(50),
+    Department NVARCHAR(50) CHECK (Department = 'IT')
+);
+Table-Level CHECK Constraint
+Here’s how to create a table with a table-level CHECK constraint that enforces that the Department column must always be 'IT':
+
+sql
+Copy code
+CREATE TABLE Employees (
+    EmployeeID INT PRIMARY KEY,
+    FirstName NVARCHAR(50),
+    LastName NVARCHAR(50),
+    Department NVARCHAR(50),
+    CONSTRAINT CHK_Department CHECK (Department = 'IT')
+);
+Examples
+Column-Level Example
+Creating the Table:
+
+sql
+Copy code
+CREATE TABLE Employees (
+    EmployeeID INT PRIMARY KEY,
+    FirstName NVARCHAR(50),
+    LastName NVARCHAR(50),
+    Department NVARCHAR(50) CHECK (Department = 'IT')
+);
+Inserting Valid Data:
+
+sql
+Copy code
+INSERT INTO Employees (EmployeeID, FirstName, LastName, Department)
+VALUES (1, 'John', 'Doe', 'IT');  -- This will succeed
+Inserting Invalid Data:
+
+sql
+Copy code
+INSERT INTO Employees (EmployeeID, FirstName, LastName, Department)
+VALUES (2, 'Jane', 'Smith', 'HR');  -- This will fail because 'HR' is not 'IT'
+Table-Level Example
+Creating the Table:
+
+sql
+Copy code
+CREATE TABLE Employees (
+    EmployeeID INT PRIMARY KEY,
+    FirstName NVARCHAR(50),
+    LastName NVARCHAR(50),
+    Department NVARCHAR(50),
+    CONSTRAINT CHK_Department CHECK (Department = 'IT')
+);
+Inserting Valid Data:
+
+sql
+Copy code
+INSERT INTO Employees (EmployeeID, FirstName, LastName, Department)
+VALUES (1, 'John', 'Doe', 'IT');  -- This will succeed
+Inserting Invalid Data:
+
+sql
+Copy code
+INSERT INTO Employees (EmployeeID, FirstName, LastName, Department)
+VALUES (2, 'Jane', 'Smith', 'HR');  -- This will fail because 'HR' is not 'IT'
+Summary
+Column-Level CHECK Constraint: Ensures that values in the Department column are always 'IT'.
+Table-Level CHECK Constraint: Ensures that values in the Department column are always 'IT'.
+Example Use Case: Enforcing that the Department column must always contain the value 'IT' to maintain data integrity and consistency.
+These constraints ensure that only 'IT' is entered as the department, maintaining the required condition across all rows in the table.

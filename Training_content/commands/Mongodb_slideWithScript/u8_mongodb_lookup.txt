@@ -1,0 +1,18 @@
+{ "_id": 1, "name": "John", "team_id": 1 }
+{ "_id": 2, "name": "Alice", "team_id": 2 }
+
+
+{ "_id": 1, "team_name": "Warriors" }
+{ "_id": 2, "team_name": "Knights" }
+
+
+db.players.aggregate([
+    {
+        $lookup: {
+            from: "teams",
+            localField: "team_id",
+            foreignField: "_id",
+            as: "team_info"
+        }
+    }
+])

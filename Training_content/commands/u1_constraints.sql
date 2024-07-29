@@ -20,3 +20,4 @@ ALTER ROLE DatabaseAccessRole DROP MEMBER vikram;
 -- GRANT SELECT, INSERT, UPDATE, DELETE, EXECUTE ON SCHEMA::SPORTS TO SchemaAccessRole;
 
 
+                   

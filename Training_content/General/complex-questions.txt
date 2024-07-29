@@ -1,0 +1,47 @@
+Explain the difference between clustered and non-clustered indexes.
+How would you optimize index usage in a highly transactional database?
+How do you use column aliases in conjunction with aggregate functions?
+
+
+
+What is the difference between joins and subqueries?
+When would you prefer a subquery over a join?
+Explain how correlated subqueries work with an example.
+Discuss the performance implications of using joins vs subqueries.
+Explain the use of user-defined data types in MSSQL.
+
+
+Provide an example of a non-correlated subquery.
+Explain how correlated subqueries can affect query performance.
+What is TSQL and how does it extend standard SQL?
+
+
+What are the main differences between TSQL and PL/SQL?
+How do error handling mechanisms differ in TSQL and PL/SQL?
+Compare the performance optimization techniques in TSQL and PL/SQL.
+Explain how transactions are managed differently in TSQL vs PL/SQL.
+Imagine you are setting up a new database for an e-commerce website. How would you ensure that only authorized users have access to sensitive customer data?
+Your company needs to comply with GDPR. Explain how you would implement data encryption and access controls to secure personal data.
+Intermediate	Describe the steps you would take to configure MSSQL Server for a small business with both transactional (OLTP) and analytical (OLAP) workloads.
+You are tasked with encrypting a column that stores credit card numbers. Describe the steps you would take to implement column-Question encryption in MSSQL.
+Explain how you would set up and manage encryption keys for a large organization with strict data security requirements.
+Explain how you would troubleshoot and resolve performance issues caused by missing or poorly designed indexes.
+Describe a scenario where a full outer join would be necessary, and provide a query example.
+Provide a scenario where a subquery would be more appropriate than a join, and write the corresponding query.
+Compare the performance implications of using a join versus a subquery for retrieving data from large tables.
+Explain how you would handle data type conversions when importing data from a CSV file with mixed data types.
+Explain a scenario where TSQL's TRY...CATCH error handling would be beneficial, compared to PL/SQL's exception handling.
+Compare how TSQL and PL/SQL handle bulk data operations, and describe a situation where one might be preferred over the other.
+Explain the concept of GROUPING SETS and how they can be used.
+Explain the difference between clustered and non-clustered indexes.
+Explain the use of user-defined data types in MSSQL.
+
+
+
+-----------------
+
+A startup wants to use a NoSQL database for a mobile app. Explain why they might choose NoSQL over SQL and what considerations they should keep in mind.
+You are migrating an application from an SQL database to a NoSQL database. Describe the challenges you might face and how you would address them.
+Explain how you would normalize a database to 3NF, starting with an example that includes redundant data.
+
+----------------

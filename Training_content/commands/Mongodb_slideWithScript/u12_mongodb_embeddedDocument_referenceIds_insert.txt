@@ -1,0 +1,57 @@
+Create the authors collection and insert some author documents.
+Insert documents into the books collection, referencing the author_id from the authors collection.
+
+// Connect to the database
+use myLibrary;
+
+// Step 1: Insert documents into the leaders collection
+db.leaders.insertMany([
+    {
+        _id: ObjectId(),
+        name: "Mahatma Gandhi",
+        birthYear: 1869,
+        nationality: "Indian"
+    },
+    {
+        _id: ObjectId(),
+        name: "Jawaharlal Nehru",
+        birthYear: 1889,
+        nationality: "Indian"
+    },
+    {
+        _id: ObjectId(),
+        name: "Sardar Vallabhbhai Patel",
+        birthYear: 1875,
+        nationality: "Indian"
+    }
+]);
+
+// Step 2: Insert documents into the books collection
+db.books.insertMany([
+    {
+        title: "My Experiments with Truth",
+        author_id: db.leaders.findOne({ name: "Mahatma Gandhi" })._id,
+        publicationYear: 1927,
+        genres: ["Autobiography"]
+    },
+    {
+        title: "The Discovery of India",
+        author_id: db.leaders.findOne({ name: "Jawaharlal Nehru" })._id,
+        publicationYear: 1946,
+        genres: ["History", "Politics"]
+    },
+    {
+        title: "Sardar Patel's Correspondence",
+        author_id: db.leaders.findOne({ name: "Sardar Vallabhbhai Patel" })._id,
+        publicationYear: 1958,
+        genres: ["Politics", "History"]
+    }
+]);
+
+// Step 3: Find all books by "Mahatma Gandhi"
+var leader = db.leaders.findOne({ name: "Mahatma Gandhi" });
+var leaderId = leader._id;
+var booksByLeader = db.books.find({ author_id: leaderId }).toArray();
+printjson(booksByLeader);
+
+

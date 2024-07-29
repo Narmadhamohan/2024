@@ -1,0 +1,53 @@
+-- Accessing sub-arrays or nested documents in MongoDB involves using dot notation 
+
+studetns collection
+
+{
+    "_id": 1,
+    "name": "John",
+    "address": {
+        "city": "New York",
+        "state": "NY",
+        "zipcode": "10001"
+    },
+    "grades": [
+        { "subject": "Math", "score": 90 },
+        { "subject": "English", "score": 80 }
+    ]
+}
+{
+    "_id": 2,
+    "name": "Alice",
+    "address": {
+        "city": "Los Angeles",
+        "state": "CA",
+        "zipcode": "90001"
+    },
+    "grades": [
+        { "subject": "Math", "score": 85 },
+        { "subject": "English", "score": 95 }
+    ]
+}
+
+
+1. Querying a Nested Document
+Query by Nested Field
+To find all students living in "New York":
+				db.students.find({ "address.city": "New York" }).pretty()
+2.  Querying an Element in a Sub-Array
+Query by Sub-Array Element
+To find all students with a Math score of 90:
+				db.students.find({ "grades.subject": "Math", "grades.score": 90 }).pretty()
+3. Updating a Nested Document
+Update a Nested Field
+
+				db.students.updateOne(
+					{ "name": "John" },
+					{ $set: { "address.city": "Boston" } }
+				)
+4. Updating an Element in a Sub-Array
+Update a Sub-Array Element
+				db.students.updateOne(
+					{ "name": "John", "grades.subject": "Math" },
+					{ $set: { "grades.$.score": 95 } }
+				)

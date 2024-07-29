@@ -1,0 +1,112 @@
+db.players.insertOne({
+  playername: "Dijo",
+  city: "Chennai",
+  Score: 50
+  Medals: 1,
+  tournaments: ["march", "April"],
+  date: Date()
+})
+
+db.players.insertMany([{
+  playername: "Vipin",
+  city: "Chennai",
+  Score: 50
+  Medals: 1,
+  Stadiums: ["April", "May"],
+  date: Date()
+},
+{
+  playername: "Shantanu",
+  city: "Chennai",
+  Score: 50
+  Medals: 1,
+  Stadiums: ["June", "July",
+  date: Date()
+}])
+
+db.players.find({})
+db.players.findOne({playername:"Shantanu"})
+db.players.find({},{city:1,Medals:1})
+
+************************** update***********************
+db.players.find( { playername: "Shantanu" } ) 
+db.players.updateOne( { playername: "Shantanu"  }, { $set: { Medals: 2 } } ) 
+db.players.find( { playername: "Shantanu" } ) 
+
+upsert - db.players.updateOne(
+{},
+{},
+{}
+)
+db.players.updateOne(
+{playername:"Supriya"},
+{$set: {playername:"Supriya"  , medals: 2}},
+{upsert: true}
+)
+
+
+db.posts.updateMany({}, { $inc: { likes: 1 } })
+
+*************************Delete*****************************
+db.players.deleteOne({playername:"supriya"})
+db.players.delteMany({category:""})
+
+
+**************************Group by *****************************
+
+db.players.aggregate(
+    [ { $group : { _id : "$city" } } ]
+)  
+
+
+db.players.aggregate([ { $limit: 1 } ])
+
+db.players.aggregate([ {$project: {"playername":1,"Medals":1} },{ $limit: 1 } ])
+
+db.players.aggregate([{ $sort: {"playername": -1}},{$project: {"playername":1, "medals":1,"city":1}},{ $limit : 1}])
+
+db.players.aggregate([{$match: {playername:"Shantanu"}},{ $sort: {"playername": -1}},{$project: {"playername":1, "medals":1,"city":1}},{ $limit : 1}])
+
+Sample_restaurants collection
+db.players.aggregate([{$addFields: {$avg: "$grades.score"} }])???
+
+-- alias as total players. matcing players are counted
+db.players.aggregate([{$match: {city: "Chennai"}},{$count: "Total players"}])
+
+-------------Joins----------------------------
+-------------Need another table---------------
+sample_mflix  - how to insert with join relations????????
+db.events.insertMany([{
+  event: "JanConnect",
+  city: "Chennai",
+  participants: 50
+  date: Date()
+},
+{
+  event: "Febconnect",
+  city: "Bangalore",
+  Participants: 100
+  Medals: 1,
+  date: Date()
+}])
+
+db.players.aggregate([
+
+$lookup:{
+from: "events"
+localField: "_id"
+ForeignField: "_id",
+as: "eventdetails"
+}
+])
+
+
+
+
+
+
+
+
+
+
+

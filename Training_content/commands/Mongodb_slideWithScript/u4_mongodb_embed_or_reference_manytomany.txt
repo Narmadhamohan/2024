@@ -1,0 +1,43 @@
+----------- students vs courses - may grow larger size -------------
+{
+  "_id": "student1",
+  "name": "John Doe",
+  "courses": [
+    { "course_id": "course1", "course_name": "Math 101" },
+    { "course_id": "course2", "course_name": "Physics 101" }
+  ]
+}
+----------- students vs courses - may grow larger size -------------
+
+{
+  "_id": "student1",
+  "name": "John Doe",
+  "course_ids": ["course1", "course2"]
+}
+
+
+
+{
+  "_id": "course1",
+  "course_name": "Math 101",
+  "student_ids": ["student1", "student2"]
+}
+
+
+----------- 3. Combination of Embedding and Referencing -------------------
+{
+  "_id": "student1",
+  "name": "John Doe",
+  "courses": [
+    { "course_id": "course1", "course_name": "Math 101" },
+    { "course_id": "course2", "course_name": "Physics 101" }
+  ]
+}
+{
+  "_id": "course1",
+  "course_name": "Math 101",
+  "student_ids": ["student1", "student2"]
+}
+
+
+

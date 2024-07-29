@@ -1,0 +1,16 @@
+SELECT state, SUM(pop) AS totalPop
+FROM zipcodes
+GROUP BY state
+HAVING totalPop >= (10*1000*1000)
+
+
+
+https://www.mongodb.com/docs/manual/reference/sql-comparison/
+
+https://www.mongodb.com/try/download/database-tools
+
+
+>mongoimport --db=vikram1 --collection=zipcodes --file=zips.json
+
+C:\Program Files\MongoDB\Server\6.0\bin>mongoimport "mongodb+srv://cluster0.mazkscp.mongodb.net/" --username narms zips.json
+Enter password for mongo user:

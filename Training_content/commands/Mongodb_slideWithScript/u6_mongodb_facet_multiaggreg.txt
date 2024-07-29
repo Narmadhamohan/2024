@@ -1,0 +1,22 @@
+
+-- players collection join with another collection using lookup
+db.players.insertMany([
+{ "name": "John", "age": 30, "score": 80 }
+{ "name": "Alice", "age": 25, "score": 90 }
+{ "name": "Bob", "age": 20, "score": 70 }
+])
+
+db.players.aggregate([
+    {
+        $facet: {
+            "age_stats": [
+                { $bucket: { groupBy: "$age", boundaries: [ 0, 20, 30, 40 ], default: "Other", output: { "count": { $sum: 1 } } } }
+            ],
+            "score_stats": [
+                { $bucket: { groupBy: "$score", boundaries: [ 0, 60, 70, 80, 90, 100 ], default: "Other", output: { "count": { $sum: 1 } } } }
+            ]
+        }
+    }
+])
+
+

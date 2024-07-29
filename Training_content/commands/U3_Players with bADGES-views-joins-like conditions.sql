@@ -197,7 +197,7 @@ where exists (select firstname from case_players where score <
  select * from u4_Players where FirstName like '_[ho]%'
 
 select * from u4_Players where PlayerID
- =any                    (select PlayerID from u4_Players
+ = any                    (select PlayerID from u4_Players
  WHERE Score>=100)
  
  select * from u4_Players where PlayerID
@@ -244,6 +244,7 @@ use TestData
 Select players.FirstName, badge.Badge 
 from u4_Players players LEFT JOIN u4_Badge  badge
 ON  players.PlayerID = badge.PlayerID;
+
 Select players.FirstName, badge.Badge 
 from u4_Players players RIGHT JOIN u4_Badge  badge
 ON  players.PlayerID = badge.PlayerID;

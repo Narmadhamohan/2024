@@ -1,0 +1,53 @@
+db.createView(
+    "playersView",
+    "players",
+    [
+        {
+            $project: {
+                "name": 1,
+                "team_id": 1
+            }
+        }
+    ]
+)
+
+
+db.playersView.find().pretty()
+
+
+
+
+--------------second view----------
+
+players
+{ "_id": 1, "name": "John", "team_id": 1 }
+{ "_id": 2, "name": "Alice", "team_id": 2 }
+
+teams
+{ "_id": 1, "team_name": "Warriors" }
+{ "_id": 2, "team_name": "Knights" }
+
+
+db.createView(
+    "playerTeams",
+    "players",
+    [
+        {
+            $lookup: {
+                from: "teams",
+                localField: "team_id",
+                foreignField: "_id",
+                as: "team_info"
+            }
+        },
+        {
+            $unwind: "$team_info"
+        },
+        {
+            $project: {
+                "name": 1,
+                "team_name": "$team_info.team_name"
+            }
+        }
+    ]
+)

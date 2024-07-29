@@ -1,0 +1,40 @@
+push to array
+pull to remove
+students
+{ "_id": 1, "name": "John", "grades": [90, 80] }
+{ "_id": 2, "name": "Alice", "grades": [85, 95] }
+
+
+db.students.updateOne(
+    { "_id": 1 },
+    { $push: { "grades": 100 } }
+)
+db.students.updateMany(
+    {},
+    { $pull: { "grades": { $lt: 85 } } }
+)
+
+
+---------------------------------------------------
+$unwind to deconstruct the array
+
+orders:
+
+{ "_id": 1, "customer": "John", "items": ["apple", "banana", "orange"] }
+{ "_id": 2, "customer": "Alice", "items": ["mango", "grape"] }
+
+db.orders.aggregate([
+    { $unwind: "$items" }
+])
+-----------------------------------------------------------
+$unset to remove one or two fields from the doc
+{ "_id": 1, "name": "John", "age": 30, "position": "Manager" }
+{ "_id": 2, "name": "Alice", "age": 25, "position": "Developer" }
+db.employees.updateMany(
+    {},
+    { $unset: { "age": "" } }
+)
+db.students.updateMany(
+    {},
+    { $unset: { "grades": "" } }
+)

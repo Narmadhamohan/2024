@@ -1,0 +1,78 @@
+Aggregate with user data
+>> main
+db.members.insertMany( [
+   {
+      _id: "jane",
+      joined: ISODate("2011-03-02"),
+      likes: ["golf", "racquetball"]
+   },
+   {
+      _id: "joe",
+      joined: ISODate("2012-07-02"),
+      likes: ["tennis", "golf", "swimming"]
+   },
+   {
+      _id: "ruth",
+      joined: ISODate("2012-01-14"),
+      likes: ["golf", "racquetball"]
+   },
+   {
+      _id: "harold",
+      joined: ISODate("2012-01-21"),
+      likes: ["handball", "golf", "racquetball"]
+   },
+   {
+      _id: "kate",
+      joined: ISODate("2012-01-14"),
+      likes: ["swimming", "tennis"]
+   }
+] )
+
+>> 	db.members.aggregate(
+   [
+      { $project: { _id: 1 } }
+   ]
+)
+
+>>sort by name
+
+db.members.aggregate(
+  [
+    { $project: { name: { $toUpper: "$_id" }, _id: 0 } },
+    { $sort: { name: 1 } }
+  ]
+)
+
+>> sort by month_joined
+
+db.members.aggregate( [
+    {
+      $project: {
+         month_joined: { $month: "$joined" },
+         name: "$_id",
+         _id: 0
+       }
+    },
+    { $sort: { month_joined: 1 } }
+] )
+
+>> use of unwind operator
+
+ db.members.aggregate(
+  [
+    { $unwind: "$likes" },
+    { $group: { _id: "$likes" , number: { $sum: 1 } } },
+    { $sort: { number: -1 } },
+    { $limit: 5 }
+  ]
+)
+
+Given the following document from the members collection:
+
+{
+  _id: "jane",
+  joined: ISODate("2011-03-02"),
+  likes: ["golf", "racquetball"]
+}
+The $unwind operator outputs the following documents:
+
