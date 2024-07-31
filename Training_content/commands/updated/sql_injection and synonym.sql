@@ -84,3 +84,21 @@ select * from xx_player_states where city = 'Chennai' or 1=1;
 create synonym rank_players FOR sports1.dbo.xx_player_states;
 drop synonym rank_players;
 select * from rank_players;
+
+CREATE TABLE purchase_orders(
+    order_id INT PRIMARY KEY,
+    vendor_id int NOT NULL,
+    order_date date NOT NULL
+);
+CREATE SEQUENCE order_number 
+AS INT
+START WITH 1
+INCREMENT BY 1;
+INSERT INTO purchase_orders
+    (order_id,
+    vendor_id,
+    order_date)
+VALUES
+    (NEXT VALUE FOR order_number,
+	NEXT VALUE FOR order_number,'2019-04-30')
+	select * from purchase_orders;

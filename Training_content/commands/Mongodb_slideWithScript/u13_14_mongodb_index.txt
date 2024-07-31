@@ -1,0 +1,405 @@
+Introduction
+Indexes are to optimize read, update and delete operation.
+Indexes load a extra funcnionality while inserting data into DB, mongoDb update indexes whenever a record in inserted
+db.contacts.getIndexes() // to get all the indexes
+
+> Why index are needed
+By default MongoDB do COLLECTION lookup while read, update and delete operation which is time consuming in sense that 
+Thare is unknown number of records that match condition 
+records position is unknown to mongoDB , HENCE mongoDB iterate over each document looking for matching condition 
+Solution : we can create an index on the column which is frequently used to access records.
+by this way all the records will be sorted and they have a referance in main document.
+In this case mongoDB will apply Index lookup.
+
+>Adding and index and explain()
+explain() this method works with find, update ,delete methods it do not work with insert method 
+this method gives details about the query executed 
+Syntax: db.contacts.explain().find({"dob.age":{$gt:60}})
+above line will give detail about execution plan 
+db.contacts.explain("executionStats").find({"dob.age":{$gt:60}}) // 5 millisecond
+above line will give more detail about query executed like "totalKeysExamined", "totalDocsExamined"
+
+db.contacts.createIndex({"dob.age":1}) // this will create an index on age column 
+db.contacts.explain("executionStats").find({"dob.age":{$gt:60}})  // 2 milisecond 
+as we can see time to execute is reduced drastically also Totaldocsexamined is reduced.
+
+> Adding conpound index 
+Index can be applied to not only integer column but also string , Do not use it for boolean as there is only 2 value true and false
+this might no improve performance 
+*** drop index : db.contacts.dropIndex({"dob.age":1}) // this will drop the indexes
+
+Compound index : db.contacts.createIndex({"dob.age":1,gender:1})
+here order of element in index does matter, Also the index will be stored in one collumn rather than 2 column like 
+[age:30,gender:"male"]
+[age:30,gender:"female"]
+so while doing indexScan mongoDB will first match age then it will go for gender
+Note this compund index can be also used for getting age as only filter as age is comes first in index list but it can't be used for 
+gender fintering.
+
+compound index rules :
+if index is on column A,B,C,D then this compund index can be used for searching (A B C D),(A B C), (A B), (A) So index flow from left
+to right.
+
+> Using index for Sorting 
+indexing does the sorting on the column, this is default behaviour.
+Internaly mongoDB uses indexes for sorting 
+db.contacts.explain("executionStats").find({"dob.age":{$gt:60}}).sort({gender:1})
+
+>Default indexes 
+mongodb  crate a default index ID , this index is unique per document 
+> creating Unique Index
+let suppose we want to create an index based on users email id, as email id will be unique per document 
+db.contact.createIndex({email:1},{unique:true})
+Note If there will be unique records of email then index will be created other wise there will be an error 
+
+> Creating partial index 
+Concept: let suppose we know that we will use index based on age but we are also certain that the gender will be "male"
+now if we create a normal index on dob.age then it will create an index including all gender , eventually it will increase 
+the index size and stand out as a inefficient index.
+
+now using partial index we can put a conditional index wheneve there will be filter based on age it will go for COLLSCAN but 
+whenever gender is specefied it will go for IDXScan
+db.contact.createIndex({"dob.age":1},{partialFilterExpression:{gender:"male"}})
+above query will create an index based on age and gender wher gender is very specefic 
+Note we can also create a compoung index on age and gender but all the gender will be included in that index 
+
+ db.contact.explain().find({"dob.age":{$gt:60}}) // COLL SCAN WILL be applicable
+ db.contact.explain().find({"dob.age":{$gt:60},gender:"male"}) // INDEX SCANN will be applcable 
+ db.contact.explain().find({"dob.age":{$gt:60},gender:"female"})  // COLLL SCAN will be applicable as gender female
+ 
+ So by using partial index we reduced index size drastically
+ 
+> Time to live index 
+concept: let suppose we have some field on document which is "date type", we can create an index on this date type 
+but there is one more imp conecpt this index will make records disappear after specefied ammount of time.
+
+db.session.createIndex({createdAt :1},{expireAfterSeconds:10})
+db.sessions.insertOne({data:"dfsfdsf",createdAt:new Date()}) this data will be deleted after 10 seconds 
+
+> Diagnose query 
+Till here we learned how to apply index and different options that comes with index 
+now we will learn how to diagnose query execution 
+we already know option comes with explain() method 
+explain("queryPlanner") // this will give executed query and winning plan 
+explain("executionStats")  // this will give executed query and winning plan and Rejected Plan
+explain("allPlansExecution")  //  this will give executed query and winning plan and Rejected Plan and Winning plan decisio nprocess
+
+>Covered Queries
+ "totalDocsExamined" : 0 
+ if total docs examined is 0 that means mongoDB is retuning data directly from indexes
+ db.contact.explain("executionStats").find({"dob.age":{$gt:60}},{"dob.age":1,_id:0})
+ here above we are getting only age from query , if something else is projected from db then document scan will get increased
+
+> How mongoDB reject Plan
+when working with indexes order of element in an index is very inportant, but this order is not imp when writing a query
+most general purpose fields are kept on left and other are on right.
+when executing query mongodb might have multiple indexes for quering a data, so mongodb set a thresold to find those records 
+using all the approch. the approch which reach thresold faster wins, then mongo db store this winning plan into the cache for
+similar king of query. 
+but it reconsider when one on following things happpen
+1) write in db (>1000) 2) add or delete index 3) index rebuilt 4) MongoDB server restarted
+
+> Multi key index 
+Till now we learned 2 types of idnex SINGLE and COMPOUND
+MultiKey Index 
+mongodb allow to store index based on array values , it scatter entire array and store as index .
+db.temp.insertOne({name:"Abhinay",hobbies:["Cooking","Sports"],address:[{street:"main Street"},{street:"second Street"}]})
+there are two array one with direct value and other with array of document 
+db.temp.createIndex({hobbies:1})   // this will create index for each element in an array
+db.temp.createIndex({addreses:1})  // this will create index for each document in an array 
+db.temp.explain("executionStats").find({"address.street":"main Street"})  /// this will not use index scan as index are stored
+as document, to use index  we should take other approch 
+ db.temp.explain("executionStats").find({"address":{street:"main Street"}})  // this will use index scan as query is asking some 
+ socument within address to have some value 
+ 
+ we can also directly create an index on sub document level 
+ db.temp.createIndex({"address.street":1})
+ db.temp.explain("executionStats").find({"address.street":"main Street"}) // now we can directly refer street within address , this 
+ will return an index scan
+ Restriction : compund index of two multikey fields can not be created, as it have to store cartician product of two array.
+
+> Text Index 
+This is a better alternative to text search regex 
+regex are very costly hence we have an alternative to search based on index 
+with text index we select a field in a document for text search, ** note there can be only ONE TEXT INDEX in a collection
+
+ db.products.insertMany([
+ {title:"A-Book",desc:"This is awesome book about a young artist"},
+ {title:"Red T-Shirt",desc:"This is red and pretty awesome"}])
+ 
+db.products.createIndex({desc:"text"}) // this will create an index on "desc" field // it will not include the, is , a , an etc 
+ db.products.find({$text:{$search:"awesome"}}) // To find some text use query like this.
+ db.products.find({$text:{$search:"red book"}}) // this will return both the document as book is in first and red in second
+to make something exclusive within a document use this 
+db.products.find({$text:{$search:"\"red and pretty\""}})
+
+>Creating combined text index
+As we can not create another text index on a collection we can merge two fields
+first dropt existing text index db.products.dropIndex("desc_text")
+now  specify all the fields which should be merged as text index 
+db.products.createIndex({desc:"text",title:"text"})
+
+** exclude some word from search criteria
+let suppose we want to find awesome but not t-shirt
+ db.products.find({$text:{$search:"awesome"}}) // this will give all records with awesome but we want to restrict t-shirt
+{ "_id" : ObjectId("5cd7e2e3e0cef38549630695"), "title" : "Red T-Shirt", "desc" : "This is red and pretty awesome" }
+{ "_id" : ObjectId("5cd7e2e3e0cef38549630694"), "title" : "A-Book", "desc" : "This is awesome book about a young artist" }
+
+we can use "-" for this 
+db.products.find({$text:{$search:"awesome -t-shirt"}})  ** note - is suffix for t-shirt
+{ "_id" : ObjectId("5cd7e2e3e0cef38549630694"), "title" : "A-Book", "desc" : "This is awesome book about a young artist" }
+
+>building index 
+index are created in background and foreground 
+till now we have created index in foreground, this locks the collection and it is faster 
+using background collection will be still accessible 
+db.collection.createIndex({indexname:1},{background:true})
+
+
+
+
+
+
+
+db.students.insertMany([
+  { name: "Alice", age: 25, scores: [90, 85], studentId: 101, location: { type: "Point", coordinates: [40.7128, -74.0060] } },
+  { name: "Bob", age: 22, scores: [78, 88], studentId: 102, location: { type: "Point", coordinates: [34.0522, -118.2437] } }
+])
+Creating Single Field Index on age:
+
+db.students.createIndex({ age: 1 })
+Creating Compound Index on age and studentId:
+
+db.students.createIndex({ age: 1, studentId: -1 })
+
+
+Creating Multikey Index on scores:
+
+db.students.createIndex({ scores: 1 })
+Creating Text Index on name:
+
+db.students.createIndex({ name: "text" })
+db.students.find({ $text: { $search: "Alice" } })
+
+db.students.createIndex({ studentId: "hashed" })
+db.students.createIndex({ location: "2dsphere" })
+
+
+wildcare
+db.students.find({
+  location: {
+    $nearSphere: {
+      $geometry: { type: "Point", coordinates: [40.7128, -74.0060] },
+      $maxDistance: 10000 // 10 kilometers
+    }
+  }
+})
+db.students.createIndex({ "$**": 1 })
+
+
+
+
+
+1. Sparse Index
+Sparse Index: This type of index only includes documents that have the indexed field. It’s useful when the field is not present in every document.
+
+Creating a Sparse Index on fieldName:
+
+db.students.createIndex({ fieldName: 1 }, { sparse: true })
+Example:
+
+Let's say you have documents where only some of them have a grade field:
+
+>>>>>>>>>>
+db.students.insertMany([
+  { name: "Alice", age: 25, grade: "A" },
+  { name: "Bob", age: 22 },
+  { name: "Charlie", age: 30, grade: "B" }
+])
+Creating a sparse index on grade:
+
+
+db.students.createIndex({ grade: 1 }, { sparse: true })
+Query Example:
+
+Find documents where the grade field exists:
+
+javascript
+Copy code
+db.students.find({ grade: { $exists: true } })
+2. Time Series Index
+Time Series Index: This type of index is optimized for handling time series data, such as logs, sensor data, or financial data. It helps efficiently store and query data that is indexed by time.
+
+Creating a Time Series Collection:
+
+To create a time series collection, you specify the timeseries option in createCollection.
+
+Example:
+
+>>>>>>>>>>>>>>>
+db.createCollection("timeSeriesData", {
+  timeseries: {
+    timeField: "timestamp", // Field containing the time information
+    metaField: "metadata",  // Optional: Field containing additional metadata
+    granularity: "minutes"  // Optional: The granularity of the time series data
+  }
+})
+Inserting Time Series Data:
+
+>>>>>>>>
+db.timeSeriesData.insertMany([
+  { timestamp: ISODate("2024-01-01T00:00:00Z"), temperature: 22.5, metadata: { location: "Room1" } },
+  { timestamp: ISODate("2024-01-01T01:00:00Z"), temperature: 23.0, metadata: { location: "Room1" } }
+])
+Query Example:
+
+Find documents within a specific time range:
+
+>>>>>>>>>>>
+db.timeSeriesData.find({
+  timestamp: {
+    $gte: ISODate("2024-01-01T00:00:00Z"),
+    $lt: ISODate("2024-01-01T02:00:00Z")
+  }
+})
+db.timeSeriesData.createIndex({ "metadata.location": 1 })
+
+Summary
+Sparse Index: Creates indexes only on documents that contain the indexed field.
+
+Command: db.collection.createIndex({ fieldName: 1 }, { sparse: true })
+Time Series Index: Optimizes storage and queries for time series data.
+
+Command: db.createCollection("timeSeriesData", { timeseries: { timeField: "timestamp", metaField: "metadata", granularity: "minutes" } })
+These index types provide additional ways to optimize queries and manage data in MongoDB, tailored to specific use cases.
+
+
+queryPlanner.winningPlan: Shows the winning plan selected by MongoDB. In this example, it uses an index scan (IXSCAN) on the age field.
+executionStats.executionTimeMillis: Time taken to execute the query.
+executionStats.totalKeysExamined: Number of index keys examined.
+executionStats.totalDocsExamined: Number of documents examined.
+Summary
+
+
+test> db.temperatureReadings.find({ "metadata.location": "Room1" }).explain("executionStats")
+{
+  explainVersion: '1',
+  queryPlanner: {
+    namespace: 'test.temperatureReadings',    
+    indexFilterSet: false,
+    parsedQuery: { 'metadata.location': { '$eq': 'Room1' } },
+    maxIndexedOrSolutionsReached: false,      
+    maxIndexedAndSolutionsReached: false,     
+    maxScansToExplodeReached: false,
+    winningPlan: { stage: 'EOF' },
+    rejectedPlans: []
+  },
+  executionStats: {
+    executionSuccess: true,
+    nReturned: 0,
+    executionTimeMillis: 0,
+    totalKeysExamined: 0,
+    totalDocsExamined: 0,
+    executionStages: {
+      stage: 'EOF',
+      nReturned: 0,
+      executionTimeMillisEstimate: 0,
+      works: 1,
+      advanced: 0,
+      needTime: 0,
+      needYield: 0,
+      saveState: 0,
+      restoreState: 0,
+      isEOF: 1
+    }
+  },
+  command: {
+    find: 'temperatureReadings',
+    filter: { 'metadata.location': 'Room1' }, 
+    '$db': 'test'
+  },
+  serverInfo: {
+    host: 'DESKTOP-06G0SB7',
+    port: 27017,
+    version: '6.0.3',
+    gitVersion: 'f803681c3ae19817d31958965850193de067c516'
+  },
+  serverParameters: {
+    internalQueryFacetBufferSizeBytes: 104857600,
+    internalQueryFacetMaxOutputDocSizeBytes: 104857600,
+    internalLookupStageIntermediateDocumentMaxSizeBytes: 104857600,
+    internalDocumentSourceGroupMaxMemoryBytes: 104857600,
+    internalQueryMaxBlockingSortMemoryUsageBytes: 104857600,
+    internalQueryProhibitBlockingMergeOnMongoS: 0,
+    internalQueryMaxAddToSetBytes: 104857600, 
+    internalDocumentSourceSetWindowFieldsMaxMemoryBytes: 104857600
+  },
+  ok: 1
+}
+
+
+
+{
+  explainVersion: '1',
+  queryPlanner: {
+    namespace: 'test.timeSeriesData',
+    indexFilterSet: false,
+    parsedQuery: {
+      '$and': [
+        { timestamp: { '$lt': ISODate("2024-01-01T02:00:00.000Z") } },
+        { timestamp: { '$gte': ISODate("2024-01-01T00:00:00.000Z") } }
+      ]
+    },
+    queryHash: 'EB69E5FF',
+    planCacheKey: 'EB69E5FF',
+    maxIndexedOrSolutionsReached: false,
+    maxIndexedAndSolutionsReached: false,
+    maxScansToExplodeReached: false,
+    winningPlan: {
+      stage: 'COLLSCAN',
+      filter: {
+        '$and': [
+          { timestamp: { '$lt': ISODate("2024-01-01T02:00:00.000Z") } },
+          {
+            timestamp: { '$gte': ISODate("2024-01-01T00:00:00.000Z") }
+          }
+        ]
+      },
+      direction: 'forward'
+    },
+    rejectedPlans: []
+  },
+  command: {
+    find: 'timeSeriesData',
+    filter: {
+      timestamp: {
+        '$gte': ISODate("2024-01-01T00:00:00.000Z"),
+        '$lt': ISODate("2024-01-01T02:00:00.000Z")
+      }
+    },
+    '$db': 'test'
+  },
+  serverInfo: {
+    host: 'DESKTOP-06G0SB7',
+    port: 27017,
+    version: '6.0.3',
+    version: '6.0.3',
+  serverParameters: {                         93de067c516'
+    internalQueryFacetBufferSizeBytes: 104857600,
+    internalQueryFacetMaxOutputDocSizeBytes: 100,04857600,    ueryFacetMaxOutputDocSizeBytes: 104857600,    internalLookupStageIntermediateDocumentMaxSizeBytes: 104857600,      SizeBytes: 10ocumentSourceGroupMaxMemoryBytes: 104857600,04857600,                                     es: 104857600,
+    internalLookupStageIntermediateDocumentMax: 0,SizeBytes: 104857600,
+    internalDocumentSourceGroupMaxMemoryBytes:moryBytes: 104857600        104857600,
+    internalQueryMaxBlockingSortMemoryUsageBytes: 104857600,
+    internalQueryProhibitBlockingMergeOnMongoS: 0,
+    internalQueryMaxAddToSetBytes: 104857600, 
+    internalDocumentSourceSetWindowFieldsMaxMemoryBytes: 104857600
+  },
+  ok: 1
+}
+
+
+
+
+
+
+

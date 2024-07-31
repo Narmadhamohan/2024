@@ -1,32 +1,55 @@
 db.players.insertOne({
   playername: "Dijo",
   city: "Chennai",
-  Score: 50
+  Score: 50,
   Medals: 1,
-  tournaments: ["march", "April"],
-  date: Date()
-})
+  tournaments: ["march", "April"],date: Date()})
 
 db.players.insertMany([{
   playername: "Vipin",
   city: "Chennai",
-  Score: 50
+  Score: 50,
   Medals: 1,
-  Stadiums: ["April", "May"],
-  date: Date()
+  "tournaments": ["April", "May"],
+  date: new Date()
 },
 {
   playername: "Shantanu",
   city: "Chennai",
-  Score: 50
+  Score: 50,
   Medals: 1,
-  Stadiums: ["June", "July",
-  date: Date()
+  "tournaments": ["June", "July"],
+  date: new Date()
 }])
 
 db.players.find({})
 db.players.findOne({playername:"Shantanu"})
 db.players.find({},{city:1,Medals:1})
+
+
+
+findAndModify: Flexible for update, remove, or replace with sorting and projection.
+findOneAndUpdate: Specifically for updating a document; simpler and modern.
+findOneAndReplace: For completely replacing a document.
+
+
+
+db.players.findAndModify({
+  query: { playername: "Vipin" },
+  update: { $inc: { Score: 10 } },
+  new: true // Return the updated document
+})
+db.players.findOneAndUpdate(
+  { playername: "Vipin" },
+  { $inc: { Score: 10 } },
+  { returnOriginal: false } // Return the updated document
+)
+db.players.findOneAndReplace(
+  { playername: "Vipin" },
+  { playername: "Vipin", city: "Chennai", Score: 60, Medals: 1 },
+  { returnOriginal: false } // Return the replaced document
+)
+
 
 ************************** update***********************
 db.players.find( { playername: "Shantanu" } ) 
@@ -45,11 +68,11 @@ db.players.updateOne(
 )
 
 
-db.posts.updateMany({}, { $inc: { likes: 1 } })
+db.players.updateMany({}, { $inc: { medals: 1 } })
 
 *************************Delete*****************************
 db.players.deleteOne({playername:"supriya"})
-db.players.delteMany({category:""})
+db.players.deleteMany({category:""})
 
 
 **************************Group by *****************************
@@ -70,8 +93,77 @@ db.players.aggregate([{$match: {playername:"Shantanu"}},{ $sort: {"playername": 
 Sample_restaurants collection
 db.players.aggregate([{$addFields: {$avg: "$grades.score"} }])???
 
+
+
+db.players.aggregate([
+  { $addFields: { "tournaments": { $concatArrays: ["$tournaments", ["August"]] } } }
+])
+
+db.players.updateMany(
+  {}, // Match all documents
+  { $push: { tournaments: { $each: ["August", "September"] } } }
+)
+
+
 -- alias as total players. matcing players are counted
 db.players.aggregate([{$match: {city: "Chennai"}},{$count: "Total players"}])
+
+
+----------------if cond check
+
+{
+  "_id": 1,
+  "playername": "Vipin",
+  "city": "Chennai",
+  "Score": 50,
+  "Medals": 1
+}
+{
+  "_id": 2,
+  "playername": "Shantanu",
+  "city": "Chennai",
+  "Score": 40,
+  "Medals": 2
+}
+{
+  "_id": 3,
+  "playername": "shantanu",
+  "city": "Mumbai",
+  "Score": 60,
+  "Medals": 3
+}
+----
+db.players.aggregate([
+  {
+    $addFields: {
+      newScore: {
+        $cond: {
+          if: { $eq: ["$playername", "Shantanu"] },
+          then: { $add: ["$Score", 10] },
+          else: { $subtract: ["$Score", 10] }
+        }
+      }
+    }
+  }
+])
+
+
+-- case -insens
+db.players.aggregate([
+  {
+    $addFields: {
+      newScore: {
+        $cond: {
+          if: { $regexMatch: { input: "$playername", regex: /^Shantanu$/i } },
+          then: { $add: ["$Score", 10] },
+          else: { $subtract: ["$Score", 10] }
+        }
+      }
+    }
+  }
+])
+
+
 
 -------------Joins----------------------------
 -------------Need another table---------------
@@ -93,15 +185,38 @@ db.events.insertMany([{
 db.players.aggregate([
 
 $lookup:{
-from: "events"
+from: "events" 
 localField: "_id"
 ForeignField: "_id",
 as: "eventdetails"
 }
 ])
 
+----------------------------------- out to collection?????-------------------
+db.listingsAndReviews.aggregate([
+  {
+    $group: {
+      _id: "$property_type",
+      properties: {
+        $push: {
+          name: "$name",
+          accommodates: "$accommodates",
+          price: "$price",
+        },
+      },
+    },
+  },
+  { $out: "properties_by_type" },
+])    
 
-
+1. $out - example, $elemmatch example, $cond example
+2. $push arrays example.
+3. $add, $sum, $avg - example
+4. Types of collections
+5. explain().
+6. Types of indexes
+7. db.getcollections()? getindexes()?????
+8. findandmodify vs findoneandupdate vs findoneand replace()
 
 
 

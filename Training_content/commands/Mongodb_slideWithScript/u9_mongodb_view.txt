@@ -51,3 +51,6 @@ db.createView(
         }
     ]
 )
+
+
+db.playerTeams.find() 
