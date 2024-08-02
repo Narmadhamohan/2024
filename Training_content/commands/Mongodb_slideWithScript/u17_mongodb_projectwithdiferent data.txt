@@ -1,0 +1,27 @@
+db.members.insertMany( [
+   {
+      _id: "jane",
+      joined: ISODate("2011-03-02"),
+      likes: ["golf", "racquetball"]
+   },
+   {
+      _id: "joe",
+      joined: ISODate("2012-07-02"),
+      likes: ["tennis", "golf", "swimming"]
+   },
+   {
+      _id: "ruth",
+      joined: ISODate("2012-01-14"),
+      likes: ["golf", "racquetball"]
+   },
+   {
+      _id: "harold",
+      joined: ISODate("2012-01-21"),
+      likes: ["handball", "golf", "racquetball"]
+   },
+   {
+      _id: "kate",
+      joined: ISODate("2012-01-14"),
+      likes: ["swimming", "tennis"]
+   }
+] )

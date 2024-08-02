@@ -1,0 +1,29 @@
+db.students.insertMany([
+  { name: "Alice", age: 25, scores: [90, 85], studentId: 101, location: { type: "Point", coordinates: [40.7128, -74.0060] } },
+  { name: "Bob", age: 22, scores: [78, 88], studentId: 102, location: { type: "Point", coordinates: [34.0522, -118.2437] } }
+])
+Creating Single Field Index on age:
+
+db.students.createIndex({ age: 1 })
+Creating Compound Index on age and studentId:
+
+db.students.createIndex({ age: 1, studentId: -1 })
+
+
+********************Creating Multikey Index on scores:
+
+db.students.createIndex({ scores: 1 })
+Creating Text Index on name:
+
+db.students.createIndex({ name: "text" })
+db.students.find({ $text: { $search: "Alice" } })
+
+db.students.createIndex({ studentId: "hashed" })
+db.students.createIndex({ location: "2dsphere" })
+
+db.customers.createIndex({
+  email: 1
+},
+{
+  unique:true
+})

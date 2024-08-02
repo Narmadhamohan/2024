@@ -1,0 +1,74 @@
+CSS transitions allow you to animate changes to CSS properties smoothly over time. Here are short examples demonstrating how to use CSS transitions:
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Transition Example</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="box"></div>
+</body>
+</html>
+
+.box {
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  transition: background-color 0.5s ease;
+}
+
+.box:hover {
+  background-color: blue;
+}
+
+
+
+*******************2*********************
+
+.box {
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  border-radius: 0;
+  transition: background-color 0.5s ease, border-radius 0.5s ease;
+}
+
+.box:hover {
+  background-color: green;
+  border-radius: 50%;
+}
+
+********************3**********************
+.box {
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  transition: transform 1s ease 0.5s;
+}
+
+.box:hover {
+  transform: scale(1.5);
+}
+
+******************4**********************
+.box {
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.box:hover, .box:focus {
+  transform: rotate(45deg);
+  background-color: yellow;
+}
+
+transform practical usage:
+instant: background-color os;
+short: opacity 0.3s
+noticeable but quick: 0.5 to 1s
+moderate: width 1 to 3 s
+long and smooth: all 3s to 5s

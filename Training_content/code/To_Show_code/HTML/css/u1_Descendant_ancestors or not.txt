@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Descendant Selector Example</title>
+  <style>
+    .ancestor p {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="ancestor">
+    <p>This is a descendant of .ancestor.</p>
+    <div>
+      <p>This is also a descendant of .ancestor.</p>
+    </div>
+  </div>
+</body>
+</html>

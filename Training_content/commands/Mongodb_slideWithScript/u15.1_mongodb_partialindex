@@ -1,0 +1,17 @@
+A partial index in MongoDB is an index that only includes documents that meet a specified filter condition. This can be useful for improving performance and saving storage space by indexing only a subset of documents.
+
+db.orders.insertMany([
+  { order_id: 1, status: "shipped", amount: 100 },
+  { order_id: 2, status: "pending", amount: 200 },
+  { order_id: 3, status: "shipped", amount: 150 },
+  { order_id: 4, status: "canceled", amount: 50 }
+])
+
+
+db.orders.createIndex(
+  { amount: 1 },
+  { partialFilterExpression: { status: "shipped" } }
+)
+
+
+db.orders.find({ status: "shipped", amount: { $gt: 120 } })

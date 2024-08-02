@@ -1,0 +1,8 @@
+db.products.insertMany([
+  { name: "product1", attributes: { color: "red", size: "M" } },
+  { name: "product2", attributes: { color: "blue", weight: "1kg" } },
+  { name: "product3", attributes: { height: "10cm", weight: "500g" } }
+])
+
+
+db.products.createIndex({ "attributes.$**": 1 })

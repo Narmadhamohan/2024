@@ -1,0 +1,12 @@
+1. Sparse Index
+
+A sparse index only includes documents that contain the indexed field, which can save space and improve performance when querying on fields that may not exist in every document.
+
+
+db.users.insertMany([
+  { name: "Alice", email: "alice@example.com" },
+  { name: "Bob" },
+  { name: "Charlie", email: "charlie@example.com" }
+])
+
+db.users.createIndex({ email: 1 }, { sparse: true })

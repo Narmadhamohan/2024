@@ -1,0 +1,28 @@
+/* Pseudo-Class: :hover */
+a:hover {
+  color: red;
+  text-decoration: underline;
+}
+
+/* Pseudo-Class: :focus */
+input:focus {
+  border: 2px solid blue;
+  background-color: lightyellow;
+}
+
+/* Pseudo-Class: :active */
+button:active {
+  background-color: green;
+  color: white;
+}
+
+/* Pseudo-Class: :visited */
+a.visited-link:visited {
+  color: purple;
+}
+
+/* Pseudo-Class: :checked */
+input[type="checkbox"]:checked + label {
+  color: orange;
+  font-weight: bold;
+}

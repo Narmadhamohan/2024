@@ -1,0 +1,15 @@
+A TTL (Time-to-Live) index is a special type of index that allows documents to automatically expire after a certain period. This is useful for collections that store temporary data, such as session information, logs, or cached data.
+
+db.sessions.insertMany([
+  { session_id: "abc123", user: "Alice", createdAt: new Date() },
+  { session_id: "def456", user: "Bob", createdAt: new Date() },
+  { session_id: "ghi789", user: "Charlie", createdAt: new Date() }
+])
+
+
+db.sessions.createIndex(
+  { createdAt: 1 },
+  { expireAfterSeconds: 86400 } // 24 hours = 86400 seconds
+)
+
+db.sessions.find()

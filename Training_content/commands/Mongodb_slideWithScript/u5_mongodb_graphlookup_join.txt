@@ -1,11 +1,11 @@
 -- self join , 
 
 db.employees.insertMany([
-  { _id: 1, employeeId: "E1", name: "Alice", reportsTo: null },
-  { _id: 2, employeeId: "E2", name: "Bob", reportsTo: "E1" },
-  { _id: 3, employeeId: "E3", name: "Charlie", reportsTo: "E1" },
+  { _id: 1, employeeId: "E1", name: "Arun", reportsTo: null },
+  { _id: 2, employeeId: "E2", name: "Jose", reportsTo: "E1" },
+  { _id: 3, employeeId: "E3", name: "Dijo", reportsTo: "E1" },
   { _id: 4, employeeId: "E4", name: "David", reportsTo: "E2" },
-  { _id: 5, employeeId: "E5", name: "Eve", reportsTo: "E2" }
+  { _id: 5, employeeId: "E5", name: "Shantanu", reportsTo: "E2" }
 ]);
 
 
@@ -24,4 +24,4 @@ db.employees.aggregate([
     }
   }
 ]);
-Finds Bob (E2) and Charlie (E3), who report to Alice (E1).
+Finds  (Jose) and  (Dijo), who report to  (Arun).

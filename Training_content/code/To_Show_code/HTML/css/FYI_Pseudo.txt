@@ -1,0 +1,7 @@
+Common Pseudo-Classes for Event Handling:
+
+1. `:hover`: Applied when the user designates an element (with a pointing device), but does not activate it.
+2. `:focus`: Applied when an element has received focus (like when a user clicks on an input field).
+3. `:active`: Applied when an element is being activated by the user (such as when a button is being clicked).
+4. `:visited`: Applied to links that the user has already visited.
+5. `:checked`: Applied to checkboxes or radio buttons that are checked.

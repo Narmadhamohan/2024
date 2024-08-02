@@ -1,0 +1,56 @@
+Create an Index on a Single Field:
+db.collection.createIndex({ field: 1 });
+
+Create a Compound Index (Multiple Fields):
+db.collection.createIndex({ field1: 1, field2: -1 });
+
+Create a Unique Index:
+Unique: db.collection.createIndex({ field: 1 }, { unique: true })
+
+Only indexes documents where the field exists
+db.collection.createIndex({ field: 1 }, { sparse: true });
+
+Create a Text Index:
+db.collection.createIndex({ field: "text" });
+
+• Automatically removes documents after a specified time
+TTL: db.collection.createIndex({ dateField: 1 }, { expireAfterSeconds: 3600 })
+
+Create a Geospatial Index:
+db.collection.createIndex({ location: "2dsphere" });
+
+Create a Partial Index:
+db.collection.createIndex({ field: 1 }, { partialFilterExpression: { status: { $eq: "active" } } });
+
+Create a Text index
+db.collection.createIndex({ field: "text" });
+
+Wildcard: db.collection.createIndex({ "$**": 1 })
+Indexes all fields in a document, including nested ones
+
+Create a Timeseries index E.G: Sensor
+db.createCollection("myTimeSeriesCollection", { timeseries: { timeField: "timestamp", metaField: "metadata" } });
+
+Find Explain plan
+db.collection.find({ field: value }).explain("executionStats");
+
+Drop an Index:
+db.collection.dropIndex("indexName");
+• Indexes the hash of the field's value; good for sharding
+Hashed: db.collection.createIndex({ field: "hashed" })
+
+db.setProfilingLevel(2);
+// Enable profiling for slow operations (e.g., slower than 100 milliseconds)
+db.setProfilingLevel(1, { slowms: 100 });
+db.setProfilingLevel(0);
+View profile
+db.system.profile.find().pretty();
+db.system.profile.find().sort({ ts: -1 }).limit(1).pretty();
+Clustered indexes:
+ This ensures that documents are physically stored on disk in the order specified by the clustered index.
+ db.createCollection("myCollection", {
+  clusteredIndex: { 
+    key: { _id: 1 }, 
+    unique: true     
+  }
+});

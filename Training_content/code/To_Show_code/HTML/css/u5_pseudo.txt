@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Handlers with CSS Pseudo-Classes</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a href="#">Hover over me</a>
+  <br><br>
+  <input type="text" placeholder="Focus on me">
+  <br><br>
+  <button>Click me</button>
+  <br><br>
+  <a href="#" class="visited-link">Visited link example</a>
+  <br><br>
+  <input type="checkbox" id="checkbox">
+  <label for="checkbox">Check me</label>
+</body>
+</html>

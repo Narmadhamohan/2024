@@ -1,0 +1,26 @@
+ Time Series Index
+
+MongoDB has built-in support for time series collections, which automatically manage time-based data. 
+
+Time series indexes optimize queries on the `timestamp` field and automatically index the time field.
+
+
+
+
+db.createCollection("sensorData", {
+  timeseries: {
+    timeField: "timestamp",
+    metaField: "metadata",
+    granularity: "minutes"
+  }
+})
+db.sensorData.insertMany([
+  { timestamp: new Date("2023-07-28T08:00:00Z"), metadata: { sensorId: 1 }, temperature: 22 },
+  { timestamp: new Date("2023-07-28T08:01:00Z"), metadata: { sensorId: 1 }, temperature: 23 },
+  { timestamp: new Date("2023-07-28T08:02:00Z"), metadata: { sensorId: 2 }, temperature: 21 }
+])
+db.sensorData.insertMany([
+  { timestamp: new Date("2023-07-28T08:00:00Z"), metadata: { sensorId: 1 }, temperature: 22 },
+  { timestamp: new Date("2023-07-28T08:01:00Z"), metadata: { sensorId: 1 }, temperature: 23 },
+  { timestamp: new Date("2023-07-28T08:02:00Z"), metadata: { sensorId: 2 }, temperature: 21 }
+])
