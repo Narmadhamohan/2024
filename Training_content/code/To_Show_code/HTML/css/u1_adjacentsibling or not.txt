@@ -3,16 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Adjacent Sibling Selector Example</title>
+  <title>Descendant Selector Example</title>
   <style>
-    h1 + p {
-      color: green;
+    .ancestor p {
+      color: red;
     }
   </style>
 </head>
 <body>
-  <h1>This is a heading</h1>
-  <p>This paragraph is immediately after the heading.</p>
-  <p>This paragraph is not immediately after the heading.</p>
+  <div class="ancestor">
+    <p>This is a descendant of .ancestor.</p>
+    <div>
+      <p>This is also a descendant of .ancestor.</p>
+    </div>
+  </div>
 </body>
 </html>

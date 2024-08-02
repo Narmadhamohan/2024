@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap Example 1</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+
+
+
+<!-- Navigation -->
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">My Website</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Home</a></li>
+      <li><a href="#About">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#Contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+<section id= "services">
+  <p>This is a Services. <strong>This text is bold.</strong> <em>This text is italic.</em></p>
+
+</section>
+
+
+<section id= "About">
+  <p>This is a About. <strong>This text is bold.</strong> <em>This text is italic.</em></p>
+
+</section>
+
+<section id= "Contact">
+  <p>This is a Contact. <strong>This text is bold.</strong> <em>This text is italic.</em></p>
+
+</section>
+
+<!-- Typography -->
+<div class="container">
+  <h1>Heading 1</h1>
+  <p>This is a paragraph. <strong>This text is bold.</strong> <em>This text is italic.</em></p>
+  <h2>Heading 2</h2>
+  <p><mark>Highlighted text</mark> and <small>small text</small></p>
+  <h3>Heading 3</h3>
+  <blockquote>
+    <p>This is a blockquote. It's used to quote long sections of text.</p>
+    <footer>Someone famous in <cite title="Source Title">Source Title</cite></footer>
+  </blockquote>
+</div>
+
+<!-- Links -->
+<div class="container">
+  <h3>Links</h3>
+  <p><a href="#" class="btn btn-primary">Primary Button</a></p>
+  <p><a href="#" class="btn btn-success">Success Button</a></p>
+  <p><a href="#" class="btn btn-info">Info Button</a></p>
+  <p><a href="#" class="btn btn-warning">Warning Button</a></p>
+  <p><a href="#" class="btn btn-danger">Danger Button</a></p>
+  <p><a href="#" class="btn btn-link">Link Button</a></p>
+</div>
+
+
+<ul class="nav">
+
+	<li class="nav-item">
+	<a class="nav-link active" href="#"> Active</a>
+	</li>
+
+	<li class="nav-item">
+	<a class="nav-link " href="#"> Another link</a>
+	</li>
+	
+</ul>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</body>
+</html>

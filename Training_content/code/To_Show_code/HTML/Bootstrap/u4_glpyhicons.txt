@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap Example 2</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- Jumbotron -->
+<div class="jumbotron text-center">
+  <h1>Welcome to My Website</h1>
+  <p>Bootstrap is the most popular HTML, CSS, and JS framework.</p>
+  <a href="#" class="btn btn-primary btn-lg">Learn more</a>
+</div>
+
+<!-- Grid System -->
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4">
+      <h3>Column 1</h3>
+      <p>Wonderful days are ahead.Wonderful times are ahead. Wonderful moments are ahead.</p>
+    </div>
+    <div class="col-sm-4">
+      <h3>Column 2</h3>
+      <p>Wonderful days are ahead.Wonderful times are ahead. Wonderful moments are ahead.</p>
+    </div>
+    <div class="col-sm-4">
+      <h3>Column 3</h3>
+      <p>Wonderful days are ahead.Wonderful times are ahead. Wonderful moments are ahead.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Glyphicons -->
+<div class="container text-center">
+  <h3>Glyphicons</h3>
+  <p>Bootstrap includes over 250 glyphs in font format from the Glyphicon Halflings set. Here are a few examples:</p>
+  <span class="glyphicon glyphicon-search"></span>
+  <span class="glyphicon glyphicon-envelope"></span>
+  <span class="glyphicon glyphicon-thumbs-up"></span>
+  <span class="glyphicon glyphicon-home"></span>
+  <span class="glyphicon glyphicon-user"></span>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</body>
+</html>
