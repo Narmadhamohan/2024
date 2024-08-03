@@ -1,0 +1,167 @@
+Statements:
+Values, Operators, Expressions, Keywords, and Comments.
+
+
+ Values, Literals, Comments
+Variables, Operators, Data Types
+Built-In Functions (String, Number)
+Basic I/O (MSGBox, Inputbox, Write())
+string functions, date time, 
+DOM iterator, if, for, switch, while
+
+
+ECMAScript official lang
+single or double quotes
+What is doc?
+getElement function
+document.getElementById("demo").innerHTML = "Hello JavaScript";
+**********
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>What Can JavaScript Do?</h2>
+
+<p>JavaScript can change HTML attribute values.</p>
+
+<p>In this case JavaScript changes the value of the src (source) attribute of an image.</p>
+
+<button onclick="document.getElementById('myImage').src='pic_bulbon.gif'">Turn on the light</button>
+
+<img id="myImage" src="pic_bulboff.gif" style="width:100px">
+
+<button onclick="document.getElementById('myImage').src='pic_bulboff.gif'">Turn off the light</button>
+
+</body>
+</html>
+****************
+
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>What Can JavaScript Do?</h2>
+
+<p id="demo">JavaScript can change the style of an HTML element.</p>
+
+<button type="button" onclick="document.getElementById('demo').style.fontSize='35px'">Click Me!</button>
+
+</body>
+</html> 
+************************
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>What Can JavaScript Do?</h2>
+
+<p id="demo">JavaScript can hide HTML elements.</p>
+
+<button type="button" onclick="document.getElementById('demo').style.display='none'">Click Me!</button>
+
+</body>
+</html> 
+
+none or block
+
+**********************************
+move from inline style to internal style
+<script>
+document.getElementById("demo").innerHTML = "My First JavaScript";
+</script>
+
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript in Body</h2>
+
+<p id="demo"></p>
+
+<script>
+document.getElementById("demo").innerHTML = "My First JavaScript";
+</script>
+
+</body>
+</html> 
+**************function - call when clicked**********************
+place in head section of page.
+
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+function myFunction() {
+  document.getElementById("demo").innerHTML = "Paragraph changed.";
+}
+</script>
+</head>
+<body>
+<h2>Demo JavaScript in Head</h2>
+
+<p id="demo">A Paragraph</p>
+<button type="button" onclick="myFunction()">Try it</button>
+
+</body>
+</html>
+
+**************place scripts at bottom of the page*******
+external script:
+function myFunction() {
+  document.getElementById("demo").innerHTML = "Paragraph changed.";
+}
+
+we are going to use:
+<script src="myScript.js"></script>
+external? remove <script> in external js.
+seperate syntax or file types.
+easy to maintain and read.
+
+see:
+
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Demo External JavaScript</h2>
+
+<p id="demo">A Paragraph.</p>
+
+<button type="button" onclick="myFunction()">Try it</button>
+
+<p>This example links to "myScript.js".</p>
+<p>(myFunction is stored in "myScript.js")</p>
+
+<script src="myScript.js"></script>
+
+</body>
+</html>
+
+
+3 types:
+cdn
+local
+filepath/js/file.js
+*******************DISPLAY Data************
+
+Writing into an HTML element, using innerHTML.
+Writing into the HTML output using document.write().
+Writing into an alert box, using window.alert().
+Writing into the browser console, using console.log().
+The Browser Object Model (BOM)
+The window object
+
+members and functions:
+All global JavaScript objects, functions, and variables automatically become members
+html document also member
+window.document.getElementById("header");
+is same as 
+document.getElementById("header");
+window.innerHeight - the inner height of the browser window (in pixels)
+window.innerWidth - the inner width of the browser window (in pixels)
+
+window.open() - open a new window
+window.close() - close the current window
+window.moveTo() - move the current window
+window.resizeTo() - resize the current window
+

@@ -1,0 +1,74 @@
+<style>
+  .fixed {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+  }
+</style>
+
+<div class="fixed">Fixed Position</div>
+
+
+
+
+<style>
+  .static {
+    position: static;
+  }
+</style>
+
+<div class="static">Static Position</div>
+
+
+
+<style>
+  .relative {
+    position: relative;
+    top: 10px; /* Moves down by 10px */
+    left: 20px; /* Moves right by 20px */
+  }
+</style>
+
+<div class="relative">Relative Position</div>
+
+
+<style>
+  .parent {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    background-color: lightblue;
+  }
+******************************************
+  <style>
+  .parent {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    background-color: lightblue;
+  }
+
+  .absolute {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+  }
+</style>
+
+<div class="parent">
+  <div class="absolute">Absolute Position</div>
+</div>
+****************************************
+
+<style>
+  .sticky {
+    position: sticky;
+    top: 0;
+    background-color: yellow;
+  }
+</style>
+
+<div class="sticky">Sticky Position</div>
+<p>Scroll down to see the sticky effect.</p>
+<div style="height: 2000px;">Long Content</div>
+

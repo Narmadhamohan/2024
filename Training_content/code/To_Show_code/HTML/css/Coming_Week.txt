@@ -1,0 +1,31 @@
+Monday:
+Statements, Values, Literals, Comments
+Variables, Operators, Data Types
+Built-In Functions (String, Number)
+Basic I/O (MSGBox, Inputbox, Write())
+string functions, date time, 
+DOM iterator, if, for, switch, while
+
+xslt vs css vs js
+
+Git Commands - Add, Commit, Push, Pull, Clone
+Introduction to Microservies and Dockerization 
+
+
+Assessment prep, Assignement prep,
+Mini project -> Use this microservice to display on the 
+Create mongodb -> Use this service to display on the screen
+Blood bank mgmt:
+navigation: Enter user details, 
+transfusion user list, 
+donor list
+
+Tuesday:
+why java_home, why path?
+list, stack and queue
+Tree and Graph
+Sorting: 3
+Design pattern - assignement: Day 1
+Day 2
+Day 3
+

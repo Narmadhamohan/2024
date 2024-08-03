@@ -67,9 +67,6 @@
 <p> Price 2</p>
 </section>
 
-  <div class="d-sm-block">
-  <p>Display only in larger screens</p>
-  </div>
 
   <div class="mb-3 row">
     <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>

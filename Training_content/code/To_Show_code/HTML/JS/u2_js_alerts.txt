@@ -1,0 +1,234 @@
+JavaScript has three kind of popup boxes: Alert box, Confirm box, and Prompt box.
+Alert: Display only info - to say okay
+confirmation: yes or no
+prompt - 
+
+***********Alert******
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Alert</h2>
+
+<button onclick="myFunction()">Try it</button>
+
+<script>
+function myFunction() {
+  alert("I am an alert box!");  // \n
+}
+</script>
+
+</body>
+</html>
+
+******************************
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Confirm Box</h2>
+
+
+<button onclick="myFunction()">Try it</button>
+
+<p id="demo"></p>
+
+<script>
+function myFunction() {
+  var txt;
+  if (confirm("Press a button!")) {
+    txt = "You pressed OK!";
+  } else {
+    txt = "You pressed Cancel!";
+  }
+  document.getElementById("demo").innerHTML = txt;
+}
+</script>
+
+</body>
+</html>
+***************************Input a value - prompt
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Prompt</h2>
+
+<button onclick="myFunction()">Try it</button>
+
+<p id="demo"></p>
+
+<script>
+function myFunction() {
+  let text;
+  let person = prompt("Please enter your name:", "Harry Potter");
+  if (person == null || person == "") {
+    text = "User cancelled the prompt.";
+  } else {
+    text = "Hello " + person + "! How are you today?";
+  }
+  document.getElementById("demo").innerHTML = text;
+}
+</script>
+
+</body>
+</html>
+***********keywords***********
+
+
+var	Declares a variable
+let	Declares a block variable
+const	Declares a block constant
+if	Marks a block of statements to be executed on a condition
+switch	Marks a block of statements to be executed in different cases
+for	Marks a block of statements to be executed in a loop
+function	Declares a function
+return	Exits a function
+try	Implements error handling to a block of statements
+**************var***************
+Fixed values
+Variable values
+Fixed values are called Literals.
+
+Variable values are called Variables.
+strings '' or ""
+Automatically
+Using var
+Using let
+Using const
+
+
+The var keyword was used in all JavaScript code from 1995 to 2015.
+let and const after 2015
+
+1. Always declare
+2. Always use const if the value should not be changed
+
+3. Always use const if the type should not be changed (Arrays and Objects)
+4. Only use let if you can't use const
+
+5. Only use var if you MUST support old browsers.
+
+
+let x=5;
+let y=6;
+let z= x+y;
+const pi=3.14
+let person="Dijo"
+let x = 5 +2
+"5"+2
+Names can contain letters, digits, underscores, and dollar signs.
+Names must begin with a letter.
+Names can also begin with $ and _ (but we will not use for better code stds).
+Names are case sensitive (y and Y are different variables).
+Reserved words (like JavaScript keywords) cannot be used as names.
+
+
+Assignment operator:
+
+=
+
+Equal to :
+
+==
+
+
+
+A variable declared without a value will have the value undefined.
+
+var can be redeclared but not let or const.
+
+re-declare:
+
+var a="hi"
+var a    -> ok
+
+let a="hi"
+let a; -> not ok
+************************************What is expression
+?
+
+An expression is a combination of values, variables, and operators, which computes to a value.
+
+5 * 2
+Comments:
+
+Code after double slashes // or between /* and */ is treated as a comment.
+
+A JavaScript name must begin with:
+
+A letter (A-Z or a-z)
+A dollar sign ($)
+Or an underscore (_)
+
+numbers not allowed as first character in names
+names are case sensitive
+
+*******************
+Before ES6 (2015), JavaScript did not have Block Scope.
+
+JavaScript had Global Scope and Function Scope.
+
+ES6 introduced the two new JavaScript keywords: let and const.
+
+These two keywords provided Block Scope in JavaScript:
+{
+let x=5;
+}
+{
+var x=5; //global scope
+}
+
+What is Good?
+let and const have block scope.
+
+let and const can not be redeclared.
+
+let and const must be declared before use.
+
+let and const does not bind to this.
+
+let and const are not hoisted.
+Hoisting: usage in the code part above declaration
+
+
+What is Not Good?
+var does not have to be declared.
+
+var is hoisted.
+
+var binds to this.
+Variables defined with var are hoisted to the top and can be initialized at any time.
+
+
+carName = "Volvo";
+var carName;
+
+
+
+
+in js, fun also variable
+Use const when you declare:
+
+A new Array
+A new Object
+A new Function
+A new RegExp
+
+
+The keyword const is a little misleading.
+
+It does not define a constant value. It defines a constant reference to a value.
+Because of this you can NOT:
+
+Reassign a constant value
+Reassign a constant array
+Reassign a constant object
+But you CAN:
+
+Change the elements of constant array
+Change the properties of constant object
+
+
+
+*******************Read from JS const**********************

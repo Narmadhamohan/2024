@@ -1,17 +1,18 @@
-@keyframes colorChange {
-  0% { background-color: red; }
-  50% { background-color: blue; }
-  100% { background-color: red; }
+
+@keyframes move {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(200px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .box {
   width: 100px;
   height: 100px;
   background-color: red;
-  animation: colorChange 4s infinite;
-  transition: transform 2s;
-}
-
-.box:hover {
-  transform: scale(1.5);
+  animation: move 0.2s ease-in-out infinite alternate, rotate 4s linear infinite;
 }
