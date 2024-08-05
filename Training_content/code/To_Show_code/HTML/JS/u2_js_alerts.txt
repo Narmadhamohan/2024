@@ -3,6 +3,28 @@ Alert: Display only info - to say okay
 confirmation: yes or no
 prompt - 
 
+Writing into an HTML element, using innerHTML.
+Writing into the HTML output using document.write().
+Writing into an alert box, using window.alert().
+Writing into the browser console, using console.log().
+************document.write**********
+<!DOCTYPE html>
+<html>
+<body>
+
+
+<p>Writing through the windows document</p>
+
+
+
+<script>
+document.write(5 + 6);
+</script>
+
+</body>
+
+</html> 
+
 ***********Alert******
 <!DOCTYPE html>
 <html>
@@ -10,7 +32,7 @@ prompt -
 
 <h2>JavaScript Alert</h2>
 
-<button onclick="myFunction()">Try it</button>
+<button onclick="myFunction()">Click</button>
 
 <script>
 function myFunction() {
@@ -29,19 +51,36 @@ function myFunction() {
 <h2>JavaScript Confirm Box</h2>
 
 
-<button onclick="myFunction()">Try it</button>
+<button onclick="confirmFunction()">Confirm</button>
+<button onclick="promptFunction()">Prompt</button>
 
 <p id="demo"></p>
 
 <script>
-function myFunction() {
+// show var and values like undefined
+// show assignment operator and ==
+//if condition
+
+function confirmFunction() {
   var txt;
-  if (confirm("Press a button!")) {
-    txt = "You pressed OK!";
+  let b;
+  if (b=confirm("Press a button!")) {
+    txt = "You pressed OK!" +b ;
   } else {
     txt = "You pressed Cancel!";
   }
   document.getElementById("demo").innerHTML = txt;
+}
+function promptFunction() {
+  let text;
+  let name = prompt("Please enter your name:", "Default Value");
+  let b;
+  if (name == null || name == "") {
+    text = "User cancelled the prompt.";
+  } else {
+    text = "Hello " + name + "! How are you today?";
+  }
+  document.getElementById("demo").innerHTML = text;
 }
 </script>
 
@@ -61,7 +100,7 @@ function myFunction() {
 <script>
 function myFunction() {
   let text;
-  let person = prompt("Please enter your name:", "Harry Potter");
+  let person = prompt("Please enter your name:", "Default Value");
   if (person == null || person == "") {
     text = "User cancelled the prompt.";
   } else {

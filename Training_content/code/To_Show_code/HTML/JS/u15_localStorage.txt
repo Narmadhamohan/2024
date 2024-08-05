@@ -1,0 +1,13 @@
+localStorage.setItem('player',JSON.stringify(["a","b","c"]));
+
+localStorage.setItem('playerObject','{"name":"Dijo"}');
+
+localStorage.getItem('playerObject')
+'{"name":"Dijo"}'
+localStorage.getItem('player')
+
+1. only string storage
+2. storage limit : 5 MB
+3.synchronous
+4.persistent after closing the session
+5. security: anyone can get it. so don't store sensitive info

@@ -1,0 +1,6 @@
+Statements, Values, Literals, Comments
+Variables, Operators, Data Types
+Built-In Functions (String, Number)
+Basic I/O (MSGBox, Inputbox, Write())
+string functions, date time, 
+DOM iterator, if, for, switch, while

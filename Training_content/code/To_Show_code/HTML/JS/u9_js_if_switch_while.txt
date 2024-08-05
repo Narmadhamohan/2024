@@ -1,0 +1,40 @@
+condition
+
+if (count ==6){console.log("print Hello")} else if (count ==7){console.log("Print second condition")} else{console.log("No value recieved")}
+
+
+
+switch(expression) {
+  case x:
+    // code block
+    break;
+  case y:
+    // code block
+    break;
+  default:
+    // code block
+}
+
+let score= 100;
+
+switch (score) {
+  case 20:
+    console.log("Paths ahead");
+    break;
+  case 100:
+    console.log("Century starts");
+    break;
+  case 200:
+    console.log("Path to lead");
+    break;
+  default:
+    console.log("Start");
+}
+
+
+let count = 0;
+
+while (count < 5) {
+  console.log("Count is: " + count);
+  count++;
+}

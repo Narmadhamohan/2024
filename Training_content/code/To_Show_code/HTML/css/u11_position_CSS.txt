@@ -1,0 +1,82 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Box Model and Positioning</title>
+    <style>
+        /* Container to illustrate box-sizing and border */
+        .box {
+            width: 200px;
+            height: 100px;
+            padding: 20px;
+            border: 5px solid black;
+            margin: 10px;
+            color: white;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        /* Content-box box-sizing */
+        .content-box {
+            box-sizing: content-box;
+            background-color: #3498db; /* Blue */
+        }
+
+        /* Border-box box-sizing */
+        .border-box {
+            box-sizing: border-box;
+            background-color: #e74c3c; /* Red */
+        }
+
+        /* Positioning examples */
+        .absolute-position {
+            position: absolute;
+            top: 50px;
+            left: 50px;
+            background-color: #2ecc71; /* Green */
+        }
+
+        .relative-position {
+            position: relative;
+            top: 30px;
+            left: 30px;
+            background-color: #f39c12; /* Yellow */
+        }
+
+        .fixed-position {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            background-color: #9b59b6; /* Purple */
+        }
+
+        .sticky-position {
+            position: sticky;
+            top: 0;
+            background-color: #1abc9c; /* Teal */
+        }
+    </style>
+</head>
+<body>
+ 
+
+    <div class="absolute-position">
+        Absolute Position
+    </div>
+
+    <div class="relative-position">
+        Relative Position
+    </div>
+
+    <div class="fixed-position">
+        Fixed Position
+    </div>
+
+    <div class="sticky-position">
+        Sticky Position
+    </div>
+</body>
+</html>

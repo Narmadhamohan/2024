@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countries Data</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Countries Data</h1>
+    <table id="countries-table" style="width:20px;height:20px;">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Region</th>
+                <th>Subregion</th>
+                <th>Population</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Data will be inserted here -->
+        </tbody>
+    </table>
+
+    <script>
+        async function fetchCountries() {
+            try {
+                const response = await fetch('https://restcountries.com/v3.1/all');
+                let allCountries = await response.json();
+                let countries = allCountries.slice(0, 20); // Limit to 20 countries
+                displayCountries(countries);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+
+        function displayCountries(countries) {
+            const tbody = document.querySelector('#countries-table tbody');
+            tbody.innerHTML = ''; // Clear existing data
+
+            countries.forEach(country => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${country.name.common}</td>
+                    <td>${country.region}</td>
+                    <td>${country.subregion}</td>
+                    <td>${country.population.toLocaleString()}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        // Initialize fetch and display
+        fetchCountries();
+    </script>
+</body>
+</html>

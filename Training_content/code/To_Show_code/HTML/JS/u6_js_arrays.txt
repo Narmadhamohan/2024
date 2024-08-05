@@ -1,0 +1,105 @@
+const players= new Array("Dijo", "Jose", "Shantanu");
+const players= ["Dijo", "Jose", "Shantanu"];
+
+players[0]="Brian"
+
+holes and direct assignment without push
+players.push("")
+players[6]="Vels"
+
+
+players.forEach(myFunction)
+function myFunction(value){
+console.log(value)
+}
+
+
+const points = new Array();
+const points = [];
+
+Both not same:
+one element with value40
+const points = [40];
+40 elments with undefined
+const points = new Array(40);  
+
+typeOf players
+Array.isArray(players)
+
+(players instanceof Array)
+
+let fun =  function myFun(){for (let i=0; i<players.length-1; i++){console.log(players[i])}}
+fun()
+let fun1= function myFun(value){console.log(value)}
+players.forEach(fun1)
+
+
+************************
+const playerDetails= {
+  name: "Dijo",
+  age: 25,
+  teams: [
+    {name:"Chennai", scores: [100,120,300]},
+    {name:"Mumbai", scores:[400,200,10]},
+    {name:"Bangalore", scores:[30,100,70]}
+  ]
+}
+
+let  playerFunction = function playerFunction(){ for(let team in playerDetails.teams){
+	console.log(" Player name: "+playerDetails.name)
+	for(let score in playerDetails.teams[team].scores){
+	//console.log("score Board: "+ playerDetails[team].scores[score])
+	console.log("score Board: "+ playerDetails.teams[team].scores[score])
+	}
+
+}  }
+
+like toString() but with seperator
+players.join(|)
+The pop() method removes the last element from an array:
+LIFO - Stack
+
+The unshift() method adds new elements to the beginning of an array:
+
+players.unshift("captain")
+The shift() method removes the first element of an array (and "shifts" the other elements to the left):
+players.shift("")
+
+use pop() or Shift()
+not delete players[0] -creates holeas as undefined in th earray
+myArray3 = myArray1.concat(myArray2) -> no change to exisitng array. always return new array
+
+The copyWithin() method overwrites the existing values.
+
+The copyWithin() method does not add items to the array.
+
+The copyWithin() method does not change the length of the array.
+
+const myArr = [[1,2],[3,4],[5,6]];
+
+const newArr = myArr.flat();
+
+
+const myArr = [1, 2, 3, 4, 5,6];
+const newArr = myArr.flatMap(x => [x, x * 10]);
+
+Splicing and Slicing Arrays
+The splice() method adds new items to an array.
+
+The slice() method slices out a piece of an array.
+The slice() method creates a new array.
+
+The slice() method does not remove any elements from the source array.
+
+
+const letters = ["A", "B", "C", "D", "E"];
+const slicedLetters = letters.slice(2);
+{const letters = ["A", "B", "C", "D", "E"];const sli = letters.slice(2); sli}
+
+splice: to splice in some values:
+let removed = letters.splice(2, 2, "Lemon", "Kiwi"); 
+{{const letters = ["A", "B", "C", "D", "E"]; const spli = letters.splice(2, 2, "Lemon", "Kiwi"); letters}}
+
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+to keep old array safely and to keep new array: const spliced = months.toSpliced(0, 1);
+

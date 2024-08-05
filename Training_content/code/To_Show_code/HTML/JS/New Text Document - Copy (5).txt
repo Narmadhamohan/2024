@@ -1,0 +1,16 @@
+condition
+
+if (count ==6){console.log("print Hello")} else if (count ==7){console.log("Print second condition")} else{console.log("No value recieved")}
+
+
+
+switch(expression) {
+  case x:
+    // code block
+    break;
+  case y:
+    // code block
+    break;
+  default:
+    // code block
+}

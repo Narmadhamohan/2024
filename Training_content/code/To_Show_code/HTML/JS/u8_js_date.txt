@@ -1,0 +1,91 @@
+JavaScript Date Input
+
+ISO dates can be written with added hours, minutes, and seconds (YYYY-MM-DDTHH:MM:SSZ):
+UTC (Coordinated Universal Time)
+GMT is often used in the UK to denote local time during the winter months when daylight saving time is not in effect.
+UTC and GMT can often be used interchangeably in casual conversation, UTC is the more precise and globally recognized time standard. GMT is still relevant as a time zone, particularly in the UK.
+Date and time is separated with a capital T.
+
+UTC/GMT time is defined with a capital letter Z.
+
+ISO : YYYYMMDD
+YYYYMMDDThhmmssZ
+There are generally 3 types of JavaScript date input formats:
+
+Type	Example
+ISO Date	"2015-03-25" (The International Standard) - strict format
+Short Date	"03/25/2015"
+Long Date	"Mar 25 2015" or "25 Mar 2015"
+
+new Date(year,month,day,hours,minutes,seconds,ms)
+const d = new Date(2018, 11, 24);
+month cannot be missed or omitted. so only year will be considered as ms
+
+const d = new Date(2018);
+JavaScript stores dates as number of milliseconds since January 01, 1970.
+
+d.toString()
+d.toDateString(); -> Readable format
+d.toISOString();
+
+Short dates are written with an "MM/DD/YYYY" syntax like this:
+
+const d = new Date();
+d.getFullYear();
+const d = new Date();
+let month = months[d.getMonth()];
+const d = new Date("2021-03-25");
+let month = months[d.getMonth()];
+console.log(new Date().getDate()); // Returns the day of the month (1-31)
+console.log(new Date().getFullYear()); // Returns the full year (e.g., 2024)
+console.log(new Date().getMonth()); // Returns the month (0-11, where 0 is January and 11 is December)
+console.log(new Date().getDay()); // Returns the day of the week (0-6, where 0 is Sunday and 6 is Saturday)
+console.log(new Date().getDay()); // Returns the day of the week (0-6, where 0 is Sunday and 6 is Saturday)
+console.log(new Date().getHours()); // Returns the hours (0-23)
+console.log(new Date().getMinutes()); // Returns the minutes (0-59)
+console.log(new Date().getSeconds()); // Returns the seconds (0-59)
+console.log(new Date().getMilliseconds()); // Returns the milliseconds (0-999)
+
+setDate()	Set the day as a number (1-31)
+setFullYear()	Set the year (optionally month and day)
+setHours()	Set the hour (0-23)
+setMilliseconds()	Set the milliseconds (0-999)
+setMinutes()	Set the minutes (0-59)
+setMonth()	Set the month (0-11)
+setSeconds()	Set the seconds (0-59)
+setTime()	Set the time (milliseconds since January 1, 1970)
+
+
+let date = new Date();
+date.setDate(15);
+console.log(date); // Sets the day of the month to 15
+let date = new Date();
+date.setFullYear(2025);
+console.log(date); // Sets the year to 2025
+let date = new Date();
+date.setHours(10);
+console.log(date); // Sets the hours to 10
+let date = new Date();
+date.setMilliseconds(500);
+console.log(date); // Sets the milliseconds to 500
+let date = new Date();
+date.setMinutes(30);
+console.log(date); // Sets the minutes to 30
+let date = new Date();
+date.setMonth(5);
+console.log(date); // Sets the month to June (months are 0-indexed, so 5 is June)
+let date = new Date();
+date.setSeconds(45);
+console.log(date); // Sets the seconds to 45
+let date = new Date();
+date.setTime(1625077800000);
+console.log(date); // Sets the time to the specified timestamp (milliseconds since January 1, 1970)
+let timestamp = 1625077800000; // Example timestamp from an API
+let date = new Date();
+date.setTime(timestamp);
+console.log(date.toLocaleString()); // Outputs the local date and time representation
+{
+const isoDateString = "2024-08-05T12:34:56"
+const date = new Date();
+console.log(date)
+}

@@ -1,0 +1,2 @@
+{setTimeout(()=>console.log("hello"),1000)}
+{const intervalId = setInterval(()=>console.log("HelloWorld"),1000); setTimeout(()=>clearInterval(intervalId),1000);}

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Count</title>
+        <script>
+            function hello() {
+                const header = document.querySelector('h1');
+                if (header.innerHTML === 'Hello!') {
+                    header.innerHTML = 'Goodbye!';
+                }
+                else {
+                    header.innerHTML = 'Hello!';
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <h1>Hello!</h1>
+        <button onclick="hello()">Click Here</button>
+    </body>
+</html>
+
+
+***********
+function count() {
+    counter++;
+    document.querySelector('h1').innerHTML = counter;
+    
+    if (counter % 10 === 0) {
+        alert(`Count is now ${counter}`)
+    }
+}
+****************
+
+2 steps to avoid inline styling, as like selector:
+remove button's onclick =hello method and adding below line in script:
+
+
+document.querySelector('button').onclick = count;
+One thing to notice about what we’ve just done is 
+that we’re not calling the count function 
+by adding parentheses afterward, 
+but instead just naming the function. 
+This specifies that we only wish to call this function 
+when the button is clicked. 
+This works because, like Python, 
+JavaScript supports functional programming, 
+so functions can be treated as values themselves.
+EVENTLISTENER:
+
+ To account for this, we can specify that code will run only after the page has loaded using the addEventListener function. This function takes in two arguments:
+
+An event to listen for (eg: 'click')
+A function to run when the event is detected (eg: hello from above)
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Some code here
+});
+
+
+
+let counter = 0;
+
+function count() {
+    counter++;
+    document.querySelector('h1').innerHTML = counter;
+    
+    if (counter % 10 === 0) {
+        alert(`Count is now ${counter}`)
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelector('button').onclick = count;
+});
+
+
+***********project code*******
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Currency Exchange</title>
+        <script src="currency.js"></script>
+    </head>
+    <body>
+        <form>
+            <input id="currency" placeholder="Currency" type="text">
+            <input type="submit" value="Convert">
+        </form>
+        <div id="result"></div>
+    </body>
+</html>
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelector('form').onsubmit = function() {
+
+        // Send a GET request to the URL
+        fetch('https://api.exchangeratesapi.io/latest?base=USD')
+        // Put response into json form
+        .then(response => response.json())
+        .then(data => {
+            // Get currency from user input and convert to upper case
+            const currency = document.querySelector('#currency').value.toUpperCase();
+
+            // Get rate from data
+            const rate = data.rates[currency];
+
+            // Check if currency is valid:
+            if (rate !== undefined) {
+                // Display exchange on the screen
+                document.querySelector('#result').innerHTML = `1 USD is equal to ${rate.toFixed(3)} ${currency}.`;
+            }
+            else {
+                // Display error on the screen
+                document.querySelector('#result').innerHTML = 'Invalid Currency.';
+            }
+        })
+        // Catch any errors and log them to the console
+        .catch(error => {
+            console.log('Error:', error);
+        });
+        // Prevent default submission
+        return false;
+    }
+});
+
+
