@@ -1,0 +1,4 @@
+D:\Training\2024_client\Training_content\code\To_Show_code\Docker\Hello_world\python>docker run -it python-helloworld /bin/bash
+root@9d50a6022890:/app# python --version
+Python 3.9.19
+root@9d50a6022890:/app#

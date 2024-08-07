@@ -1,0 +1,43 @@
+docker build . -f Dockerfile.txt -t python-helloworld
+docker build . -f Dockerfile.txt -t java-helloworld
+docker run --rm java-helloworld
+
+Run the Container with a Volume -> use volume to persist data even after the container is deleted.
+docker run -v hello-volume:/app hello-world
+
+Check the Volume:
+To see the data in the volume, you can start a new container and mount the volume
+docker run -it --rm -v hello-volume:/app busybox sh
+ls /app -> see the data
+
+
+dlete the container and check the volume
+docker volume ls
+docker volume inspect hello-volume
+
+final clean up
+docker volume rm hello-volume
+docker image rm hello-world
+
+
+container is a combo of VM + os library + app files?
+Volumes are a way to store data that is independent of the container's lifecycle. Here's a brief overview:
+Bind Mounts: These are a way to link a directory on the host machine to a directory inside the container. Changes made in the container's directory are reflected on the host and vice versa. Unlike volumes, bind mounts are tied to the host filesystem's specific path.
+
+Named Volumes: These are managed by Docker and can be referred to by a name. Docker handles the path on the host machine and manages the volume's lifecycle.
+
+
+docker hub
+docker search nginx
+docker pull nginx:1.21
+
+
+FROM nginx:1.21
+local images docker images
+
+docker hub repositor
+image repository - cloud based platform
+mange dcoker images
+
+
+ 

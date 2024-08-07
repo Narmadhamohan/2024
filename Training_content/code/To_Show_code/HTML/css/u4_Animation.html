@@ -1,0 +1,38 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Transition Example</title>
+<style>
+@keyframes move {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(200px); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+@keyframes moveAndRotate {
+  0% { transform: translateX(0) rotate(0deg); }
+  50% { transform: translateX(200px) rotate(180deg); }
+  100% { transform: translateX(0) rotate(360deg); }
+}
+
+.box {
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  /* animation: rotate 6s linear infinite, move 4s ease-in-out infinite alternate; */
+  animation:  moveAndRotate 6s linear infinite;
+}
+</style>
+</head>
+<body>
+  <div class="box"></div>
+</body>
+</html>
