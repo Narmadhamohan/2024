@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User and Task List</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="2.css">
+   
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#main">
+                                Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#user-info">
+                                User Information
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#task-list">
+                                Task List
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#date-time">
+                                Date/Time Display
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4" id="main">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom " id="dash">
+                    <h1 class="h2">Dashboard</h1>
+                </div>
+                <div id="user-info">
+                    <h2>User Information</h2>
+                    <form id="user-form">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="city">City</label>
+                            <input type="text" class="form-control" id="city" required>
+                        </div>
+                       
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+
+                <div id="task-list" class="container">
+                    <h2 style="padding-bottom: 11px;">Task List</h2>
+                    <div class="input-group mb-3">
+                        <input type="text" id="task-input" class="form-control" placeholder="Enter task name" aria-label="Task Name">
+                    </div>
+                    <div class="btn-group mb-4" role="group">
+                        <button type="button" class="btn btn-danger add-task-btn" data-priority="P1"> P1 -High priority</button> &nbsp;&nbsp;
+                        <button type="button" class="btn btn-secondary add-task-btn" data-priority="P2"> P2 - Medium priority</button> &nbsp;&nbsp;
+                        <button type="button" class="btn btn-secondary add-task-btn" data-priority="P3">P3 - Medium priority</button>&nbsp;&nbsp;
+                        <button type="button" class="btn btn-warning add-task-btn" data-priority="P4">P4 - Low priority</button>&nbsp;&nbsp;
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Task</th>
+                                <th scope="col">Priority</th>
+                            </tr>
+                        </thead>
+                        <tbody id="task-body">
+                            <!-- Tasks will be added here dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+                
+
+                <div id="date-time">
+                    <h2 style="padding-bottom: 17px; border-bottom: 2px solid #cccfd3;">Date/Time Display</h2>
+                    <p id="current-date-time"></p>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="3.js"></script>
+   
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User and Task Management</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+        }
+        .sidebar {
+            height: 100vh;
+            background-color: #343a40;
+            color: white;
+        }
+        .sidebar h4 {
+            padding: 10px;
+        }
+        .sidebar-sticky {
+            position: sticky;
+            top: 0;
+        }
+        .content {
+            padding: 20px;
+        }
+        .task-row:hover {
+            background-color: #f1f1f1;
+        }
+        .high-priority {
+            background-color: #f8d7da; /* Light red */
+        }
+        .medium-priority {
+            background-color: #fff3cd; /* Light yellow */
+        }
+        .low-priority {
+            background-color: #d4edda; /* Light green */
+        }
+        .task-row td {
+            vertical-align: middle;
+        }
+        .btn-custom {
+            background-color: #ffb3b3;
+            color: white;
+        }
+        .btn-custom:hover {
+            background-color: #ff6666;
+        }
+        .card-header {
+            background-color: #007bff;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-3 col-lg-2 d-md-block sidebar">
+                <div class="sidebar-sticky">
+                    <h4 class="text-center">User Info</h4>
+                    <form id="user-form" class="p-3">
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" class="form-control" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="city">City:</label>
+                            <input type="text" class="form-control" id="city" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                    </form>
+                    <div id="user-info" class="p-3 text-center"></div>
+                </div>
+            </nav>
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 content">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h4>Task List</h4>
+                    <div id="datetime" class="text-right"></div>
+                </div>
+                <div class="card mb-4">
+                    <div class="card-header">
+                        Add Task
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="task">Task Description:</label>
+                            <input type="text" class="form-control" id="task" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="priority">Priority:</label>
+                            <select class="form-control" id="priority">
+                                <option value="P1">P1 - High</option>
+                                <option value="P2">P2 - Medium</option>
+                                <option value="P3">P3 - Medium</option>
+                                <option value="P4">P4 - Low</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-custom" onclick="addTask()">Add Task</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        Current Tasks
+                    </div>
+                    <div class="card-body p-0">
+                        <table class="table table-hover mb-0">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Task</th>
+                                    <th>Priority</th>
+                                </tr>
+                            </thead>
+                            <tbody id="task-list">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.getElementById('user-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const city = document.getElementById('city').value;
+            document.getElementById('user-info').innerHTML = `<p><strong>Name:</strong> ${name}</p><p><strong>City:</strong> ${city}</p>`;
+        });
+
+        function addTask() {
+            const taskDescription = document.getElementById('task').value;
+            const priority = document.getElementById('priority').value;
+            const taskList = document.getElementById('task-list');
+            
+            if (!taskDescription) {
+                alert('Please enter a task description.');
+                return;
+            }
+
+            let priorityClass = '';
+            let priorityText = '';
+            switch (priority) {
+                case 'P1':
+                    priorityClass = 'high-priority';
+                    priorityText = 'High';
+                    break;
+                case 'P2':
+                case 'P3':
+                    priorityClass = 'medium-priority';
+                    priorityText = 'Medium';
+                    break;
+                case 'P4':
+                    priorityClass = 'low-priority';
+                    priorityText = 'Low';
+                    break;
+            }
+            const row = document.createElement('tr');
+            row.className = `task-row ${priorityClass}`;
+            row.innerHTML = `<td>${taskDescription}</td><td>${priorityText}</td>`;
+            taskList.appendChild(row);
+
+            document.getElementById('task').value = '';
+        }
+
+        function updateDateTime() {
+            const now = new Date();
+            document.getElementById('datetime').innerHTML = now.toLocaleString();
+        }
+        setInterval(updateDateTime, 1000);
+        updateDateTime();
+    </script>
+</body>
+</html>

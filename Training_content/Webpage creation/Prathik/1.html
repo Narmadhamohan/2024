@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Layout with Sidebar</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-size: .875rem;
+        }
+
+        main {
+            padding-top: 20px;
+        }
+
+        .sidebar-sticky {
+            position: -webkit-sticky;
+            position: sticky;
+            top: 0;
+            height: calc(100vh - 48px);
+            padding-top: .5rem;
+            overflow-x: hidden;
+            overflow-y: auto; 
+        }
+
+        .nav-link {
+            color: white;
+        }
+
+        @media (max-width: 767.98px) {
+            #sidebar {
+                position: relative;
+                z-index: 999;
+                height: 100%;
+            }
+        }
+
+        .high-priority {
+            background-color: #ffbebe;
+        }
+
+        .medium-priority-1 {
+            background-color: rgb(167, 167, 255);
+        }
+
+        .medium-priority-2 {
+            background-color: rgb(170, 170, 170);
+        }
+
+        .low-priority {
+            background-color: #beffcc;
+        }
+
+        .high-priority:hover {
+            background-color: #ffb0b0;
+        }
+
+        .medium-priority-1:hover {
+            background-color: rgb(155, 155, 255);
+        }
+
+        .medium-priority-2:hover {
+            background-color: rgb(143, 143, 143);
+        }
+
+        .low-priority:hover {
+            background-color: #acfcbd;
+        }
+
+        #date-time {
+            font-size: large;
+            background-color: rgb(240 240 240);
+            border-radius: 10px;
+            padding : 20px;
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        #user-display{
+            background-color: rgb(240 240 240);
+            border-radius: 10px;
+            padding : 20px;
+        }
+
+        #task-list{
+            background-color: rgb(240 240 240);
+            border-radius: 10px;
+            padding : 20px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .table-bordered-black {
+            border: 2px solid black;
+        }
+
+        .table-bordered-black th,
+        .table-bordered-black td,
+        .table-bordered-black tr {
+            border: 1px solid black;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-primary sidebar collapse">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#date-time">
+                                Date Time Display
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#user-display">
+                                User Display Information
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#task-list">
+                                Task List Display
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <div class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+
+                <div class="section" id="date-time">
+                    <h2>Date and Time</h2>
+                    <p id="date-time-display"></p>
+                </div>
+
+                <div class="section" id="user-display">
+                    <h2>User Display Information</h2>
+                    <form id="userForm" onsubmit="return validateForm()">
+                        <div >
+                            <label for="userName">Name</label>
+                            <input type="text" class="form-control" id="userName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="userCity">City</label>
+                            <input type="text" class="form-control" id="userCity" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+
+                <div class="section" id="task-list">
+                    <h2>Task List</h2>
+                    <form id="taskForm" onsubmit="return addTask()">
+                        <div class="form-group">
+                            <label for="taskDescription">Enter your task</label>
+                            <input type="text" class="form-control" id="taskDescription" value="Default" required>
+                        </div>
+                        <div class="form-group priority-btn-group">
+                            <label>Set Priority</label><br>
+                            <button type="button" class="btn btn-outline-danger priority-btn" data-priority="1">P1 - High</button>
+                            <button type="button" class="btn btn-outline-primary priority-btn" data-priority="2">P2 - Medium</button>
+                            <button type="button" class="btn btn-outline-secondary priority-btn" data-priority="3">P3 - Medium</button>
+                            <button type="button" class="btn btn-outline-success priority-btn" data-priority="4">P4 - Low</button>
+                        </div>
+                        <input type="hidden" id="taskPriority" required>
+                        <button type="submit" class="btn btn-primary">Add Task</button>
+                    </form>
+                    <table class="table mt-3 table-bordered-black">
+                        <thead>
+                            <tr>
+                                <th scope="col">S.No</th>
+                                <th scope="col">Task</th>
+                                <th scope="col">Priority</th>
+                            </tr>
+                        </thead>
+                        <tbody id="taskTableBody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const intervlID = setInterval(() => {
+                document.getElementById('date-time-display').innerHTML = new Date().toLocaleString();
+            }, 1000);
+
+            const priorityButtons = document.querySelectorAll('.priority-btn');
+            priorityButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    priorityButtons.forEach(btn => btn.classList.remove('btn-primary'));
+                    button.classList.add('btn-primary');
+                    document.getElementById('taskPriority').value = button.dataset.priority;
+                });
+            });
+        });
+
+        let taskCount = 0;
+
+        function validateForm() {
+            const userName = document.getElementById('userName').value;
+            const userCity = document.getElementById('userCity').value;
+            confirm(`You've entered Name = ${userName} and City = ${userCity} !`);
+            return true;
+        }
+
+        function addTask() {
+            const taskDescription = document.getElementById('taskDescription').value;
+            const taskPriority = document.getElementById('taskPriority').value;
+
+            if (!taskDescription || !taskPriority) {
+                alert('You have to set priority');
+                return false;
+            }
+
+            taskCount++;
+            const taskTableBody = document.getElementById('taskTableBody');
+            const newRow = document.createElement('tr');
+            let priorityClass = '';
+            let priorityText = '';
+
+            switch (taskPriority) {
+                case '1':
+                    priorityClass = 'high-priority';
+                    priorityText = 'High';
+                    break;
+                case '2':
+                    priorityClass = 'medium-priority-1';
+                    priorityText = 'Medium ';
+                    break;
+                case '3':
+                    priorityClass = 'medium-priority-2';
+                    priorityText = 'Medium';
+                    break;
+                case '4':
+                    priorityClass = 'low-priority';
+                    priorityText = 'Low';
+                    break;
+            }
+
+            newRow.classList.add(priorityClass);
+            newRow.innerHTML = `
+                <th scope="row">${taskCount}</th>
+                <td>${taskDescription}</td>
+                <td>${priorityText}</td>
+            `;
+
+            taskTableBody.appendChild(newRow);
+            document.getElementById('taskForm').reset();
+            document.querySelectorAll('.priority-btn').forEach(btn => btn.classList.remove('btn-primary'));
+            return false;
+        }
+    </script>
+</body>
+</html>

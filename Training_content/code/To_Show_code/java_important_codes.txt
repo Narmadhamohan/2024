@@ -1,0 +1,955 @@
+ A package is a grouping of related types providing access protection and name space management. Note that types refers to classes, interfaces, enumerations, and annotation types.
+ 
+ 
+ Note: The String class is immutable, so that once it is created a String object cannot be changed. The String class has a number of methods, some of which will be discussed below, that appear to modify strings. Since strings are immutable, what these methods really do is create and return a new string that contains the result of the operation.
+ 
+ String greeting = "Hello world!";
+The String class has thirteen constructors that allow you to provide the initial value of the string using different sources, such as an array of characters:
+
+char[] helloArray = { 'h', 'e', 'l', 'l', 'o', '.' };
+String helloString = new String(helloArray);
+System.out.println(helloString);
+
+String length()
+String palindrome = "Dot saw I was Tod";
+int len = palindrome.length();
+charAt()
+
+Concatenating Strings
+string1.concat(string2); 
+"My name is ".concat("Rumplestiltskin");
+"Hello," + " world" + "!"
+System.out.printf("The value of the float " +
+                  "variable is %f, while " +
+                  "the value of the " + 
+                  "integer variable is %d, " +
+                  "and the string is %s", 
+                  floatVar, intVar, stringVar); 
+String fs;
+fs = String.format("The value of the float " +
+                   "variable is %f, while " +
+                   "the value of the " + 
+                   "integer variable is %d, " +
+                   " and the string is %s",
+                   floatVar, intVar, stringVar);
+System.out.println(fs);
+
+
+
+
+
+
+Tostring demo
+
+public class ToStringDemo {
+    
+    public static void main(String[] args) {
+        double d = 858.48;
+        String s = Double.toString(d);
+        
+        int dot = s.indexOf('.');
+        
+        System.out.println(dot + " digits " +
+            "before decimal point.");
+        System.out.println( (s.length() - dot - 1) +
+            " digits after decimal point.");
+    }
+}
+
+indexof
+lastindexof
+
+
+
+public class FilenameDemo {
+    public static void main(String[] args) {
+        final String FPATH = "/home/user/index.html";
+        Filename myHomePage = new Filename(FPATH, '/', '.');
+        System.out.println("Extension = " + myHomePage.extension());
+        System.out.println("Filename = " + myHomePage.filename());
+        System.out.println("Path = " + myHomePage.path());
+    }
+}
+
+startswith, endswith, equals, equalsignorecase
+String Builder
+
+
+public class StringBuilderDemo {
+    public static void main(String[] args) {
+        String palindrome = "Dot saw I was Tod";
+         
+        StringBuilder sb = new StringBuilder(palindrome);
+        
+        sb.reverse();  // reverse it
+        
+        System.out.println(sb);
+    }
+}
+
+
+he String class has over 60 methods and 13 constructors.
+
+Most commonly, you create a string with a statement like
+
+String s = "Hello world!";
+
+
+
+Collections
+
+Autoboxing is the automatic conversion that the Java compiler makes between the primitive types and their corresponding object wrapper classes. For example, converting an int to an Integer, a double to a Double, and so on. If the conversion goes the other way, this is called unboxing.
+List<Integer> li = new ArrayList<>();
+for (int i = 1; i < 50; i += 2)
+    li.add(i);
+	
+Interfaces:
+In the Java programming language, an interface is a reference type, similar to a class, that can contain only constants, method signatures, default methods, static methods, and nested types.
+Generally speaking, interfaces are such contracts.
+Interface as API
+
+
+Inheritance show hierarchy:
+Definitions: A class that is derived from another class is called a subclass (also a derived class, extended class, or child class). The class from which the subclass is derived is called a superclass (also a base class or a parent class).
+
+
+Overriding uses runtime binding (polymorphism), where the method that gets called is based on the actual object type.
+Hiding uses compile-time binding, where the method that gets called is based on the reference type.	
+
+
+
+class SuperClass {
+    public static void display() {
+        System.out.println("This is the static method from SuperClass.");
+    }
+}
+
+class SubClass extends SuperClass {
+    public static void display() {
+        System.out.println("This is the static method from SubClass.");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        SuperClass obj = new SubClass();
+        obj.display(); // Calls the hidden method in SuperClass
+
+        SubClass.display(); // Calls the hidden method in SubClass
+    }
+}
+
+
+
+What You Can Do in a Subclass
+A subclass inherits all of the public and protected members of its parent, no matter what package the subclass is in. If the subclass is in the same package as its parent, it also inherits the package-private members of the parent. You can use the inherited members as is, replace them, hide them, or supplement them with new members:
+A subclass does not inherit the private members of its parent class
+
+
+
+
+The inherited fields can be used directly, just like any other fields.
+You can declare a field in the subclass with the same name as the one in the superclass, thus hiding it (not recommended).
+You can declare new fields in the subclass that are not in the superclass.
+The inherited methods can be used directly as they are.
+You can write a new instance method in the subclass that has the same signature as the one in the superclass, thus overriding it.
+You can write a new static method in the subclass that has the same signature as the one in the superclass, thus hiding it.
+You can declare new methods in the subclass that are not in the superclass.
+You can write a subclass constructor that invokes the constructor of the superclass, either implicitly or by using the keyword super.
+
+
+
+
+Casting shows the use of an object of one type in place of another type, among the objects permitted by inheritance and implementations. For example, if we write
+
+
+
+Object obj = new MountainBike();
+
+instanceof 
+
+static methods are hidden based on reference type l.h.s
+normal instanc emethods are overriden that means based on object type r.h.s
+
+
+Defining a Method with the Same Signature as a Superclass's Method
+							Superclass Instance Method			Superclass Static Method
+Subclass Instance Method	Overrides							Generates a compile-time error
+Subclass Static Method	Generates a compile-time error			Hides
+
+
+
+
+
+The access specifier for an overriding method can allow more, but not less, access than the overridden method. For example, a protected instance method in the superclass can be made public, but not private, in the subclass.
+
+You will get a compile-time error if you attempt to change an instance method in the superclass to a static method in the subclass, and vice versa.
+	
+	
+	    Bicycle bike01, bike02, bike03;
+The Java virtual machine (JVM) calls the appropriate method for the object that is referred to in each variable. It does not call the method that is defined by the variable's type. This behavior is referred to as virtual method invocation and demonstrates an aspect of the important polymorphism features in the Java language.
+
+hiddenfields super
+
+
+https://docs.oracle.com/javase/tutorial/java/IandI/objectclass.html
+
+public class Book {
+    String ISBN;
+    
+    public String getISBN() { 
+        return ISBN;
+    }
+    
+    public boolean equals(Object obj) {
+        if (obj instanceof Book)
+            return ISBN.equals((Book)obj.getISBN()); 
+        else
+            return false;
+    }
+}
+
+
+
+Consider this code te equivalency hat tests two instances of the Book class for equality:
+
+
+
+
+
+// Swing Tutorial, 2nd edition
+Book firstBook  = new Book("0201914670");
+Book secondBook = new Book("0201914670");
+if (firstBook.equals(secondBook)) {
+    System.out.println("objects are equal");
+} else {
+    System.out.println("objects are not equal");
+}
+
+
+
+
+
+
+
+****************The hashCode() Method
+The value returned by hashCode() is the object's hash code, which is an integer value generated by a hashing algorithm.
+
+By definition, if two objects are equal, their hash code must also be equal. If you override the equals() method, you change the way two objects are equated and Object's implementation of hashCode() is no longer valid. Therefore, if you override the equals() method, you must also override the hashCode() method as well.
+
+
+
+
+
+training
+n the section on Interfaces, it was noted that a class that implements an interface must implement all of the interface's methods. It is possible, however, to define a class that does not implement all of the interface's methods, provided that the class is declared to be abstract. F
+
+n the section on Interfaces, it was noted that a class that implements an interface must implement all of the interface's methods. It is possible, however, to define a class that does not implement all of the interface's methods, provided that the class is declared to be abstract. F
+
+
+
+
+
+
+Consider using abstract classes if any of these statements apply to your situation:abstractmap
+You want to share code among several closely related classes.
+You expect that classes that extend your abstract class have many common methods or fields, or require access modifiers other than public (such as protected and private).
+You want to declare non-static or non-final fields. This enables you to define methods that can access and modify the state of the object to which they belong.
+Consider using interfaces if any of these statements apply to your situation:
+You expect that unrelated classes would implement your interface. For example, the interfaces Comparable and Cloneable are implemented by many unrelated classes.
+You want to specify the behavior of a particular data type, but not concerned about who implements its behavior.
+You want to take advantage of multiple inheritance of type.
+
+Operators are special symbols that perform specific operations on one, two, or three operands, and then return a result.
+
+
+
+
+
+Operators	Precedence
+postfix	expr++ expr--
+unary	++expr --expr +expr -expr ~ !
+multiplicative	* / %
+additive	+ -
+shift	<< >> >>>
+relational	< > <= >= instanceof
+equality	== !=
+bitwise AND	&
+bitwise exclusive OR	^
+bitwise inclusive OR	|
+logical AND	&&
+logical OR	||
+ternary	? :
+assignment	= += -= *= /= %= &= ^= |= <<= >>= >>>=
+
+
+
+
+In general-purpose programming, certain operators tend to appear more frequently than others; for example, the assignment operator "=" is far more common than the unsigned right shift operator ">>>". With that in mind, the following discussion focuses first on the operators that you're most likely to use on a regular basis, and ends focusing on those that are less common.
+
+
+
+Operator	Description
++	Additive operator (also used for String concatenation)
+-	Subtraction operator
+*	Multiplication operator
+/	Division operator
+%	Remainder operator
+
+
+class ConcatDemo {
+    public static void main(String[] args){
+        String firstString = "This is";
+        String secondString = " a concatenated string.";
+        String thirdString = firstString+secondString;
+        System.out.println(thirdString);
+    }
+}
+
+
+
+
+
+Operator	Description
++	Unary plus operator; indicates positive value (numbers are positive without this, however)
+-	Unary minus operator; negates an expression
+++	Increment operator; increments a value by 1
+--	Decrement operator; decrements a value by 1
+!	Logical complement operator; inverts the value of a boolean
+
+==      equal to
+!=      not equal to
+>       greater than
+>=      greater than or equal to
+<       less than
+<=      less than or equal to
+
+
+
+
+
+&& Conditional-AND
+|| Conditional-OR
+ boolean someCondition = true;
+        result = someCondition ? value1 : value2;
+		
+		  Parent obj1 = new Parent();
+        Parent obj2 = new Child();
+
+        System.out.println("obj1 instanceof Parent: "
+            + (obj1 instanceof Parent));
+null is not instance of anyting
+The bitwise & operator performs a bitwise AND operation.
+
+The bitwise ^ operator performs a bitwise exclusive OR operation.
+
+The bitwise | operator performs a bitwise inclusive OR operation.
+
+
+Expressions:
+An expression is a construct made up of variables, operators, and method invocations, which are constructed according to the syntax of the language, that evaluates to a single value
+
+ Operators may be used in building expressions, which compute values; expressions are the core components of statements; statements may be grouped into blocks.
+ x + y / 100    // ambiguous
+(x + y) / 100  // unambiguous, recommended
+
+
+Statements are roughly equivalent to sentences in natural languages. A statement forms a complete unit of execution. The following types of expressions can be made into a statement by terminating the expression with a semicolon (;).
+
+Assignment expressions
+Any use of ++ or --
+Method invocations
+Object creation expressions
+
+
+Such statements are called expression statements. Here are some examples of expression statements.
+// assignment statement
+aValue = 8933.234;
+// increment statement
+aValue++;
+// method invocation statement
+System.out.println("Hello World!");
+// object creation statement
+Bicycle myBike = new Bicycle()
+System.out.println("Hello World!");
+
+
+// declaration statement
+double aValue = 8933.234;
+
+
+
+
+Blocks
+A block is a group of zero or more statements between balanced braces and can be used anywhere a single statement is allowed. The following example, BlockDemo, illustrates the use of blocks:
+
+
+
+class BlockDemo {
+     public static void main(String[] args) {
+          boolean condition = true;
+          if (condition) { // begin block 1
+               System.out.println("Condition is true.");
+          } // end block one
+          else { // begin block 2
+               System.out.println("Condition is false.");
+          } // end block 2
+     }
+}
+
+
+
+
+
+Operators may be used in building ___, which compute values.
+Expressions are the core components of ___.
+Statements may be grouped into ___.
+Statements are roughly equivalent to sentences in natural languages, but instead of ending with a period, a statement ends with a ___.
+A block is a group of zero or more statements between balanced braces and can be used anywhere a single statement is allowed.
+dentify the following kinds of expression statements:
+
+aValue = 8933.234; // assignment statement
+aValue++; // increment statement
+System.out.println("Hello World!"); // method invocation statement
+Bicycle myBike = new Bicycle(); // object creation statement
+
+
+
+
+he statements inside your source files are generally executed from top to bottom, in the order that they appear. Control flow statements, however, break up the flow of execution by employing decision making, looping, and branching, enabling your program to conditionally execute particular blocks of code. This section describes the decision-making statements (if-then, if-then-else, switch), the looping statements (for, while, do-while), and the branching statements (break, continue, return) supported by the Java programming language.
+
+
+class IfElseDemo {
+    public static void main(String[] args) {
+
+        int testscore = 76;
+        char grade;
+
+        if (testscore >= 90) {
+            grade = 'A';
+        } else if (testscore >= 80) {
+            grade = 'B';
+        } else if (testscore >= 70) {
+            grade = 'C';
+        } else if (testscore >= 60) {
+            grade = 'D';
+        } else {
+            grade = 'F';
+        }
+        System.out.println("Grade = " + grade);
+    }
+}
+
+Switch stmt:
+
+
+ the switch statement can have a number of possible execution paths.
+ 
+ 
+  A switch works with the byte, short, char, and int primitive data types. It also works with enumerated types (discussed in Enum Types), the String class, and a few special classes that wrap certain primitive types: Character, Byte, Short, and Integer (discussed in Numbers and Strings).
+  
+  
+  The body of a switch statement is known as a switch block. 
+  
+  switch with null -> nullpointer exception
+  
+  
+  
+  The difference between do-while and while is that do-while evaluates its expression at the bottom of the loop instead of the top.
+class DoWhileDemo {
+    public static void main(String[] args){
+        int count = 1;
+        do {
+            System.out.println("Count is: " + count);
+            count++;
+        } while (count < 11);
+    }
+}
+
+do {
+     statement(s)
+} while (expression);while (expression) {
+     statement(s)
+}
+
+
+
+
+
+The for statement provides a compact way to iterate over a range of values. Programmers often refer to it as the "for loop" because of the way in which it repeatedly loops until a particular condition is satisfied. The general form of the for statement can be expressed as follows:
+
+for (initialization; termination;
+     increment) {
+    statement(s)
+}
+
+
+
+
+When using this version of the for statement, keep in mind that:
+
+The initialization expression initializes the loop; it's executed once, as the loop begins.
+When the termination expression evaluates to false, the loop terminates.
+The increment expression is invoked after each iteration through the loop; it is perfectly acceptable for this expression to increment or decrement a value.
+
+
+class EnhancedForDemo {
+    public static void main(String[] args){
+         int[] numbers = 
+             {1,2,3,4,5,6,7,8,9,10};
+         for (int item : numbers) {
+             System.out.println("Count is: " + item);
+         }
+    }
+}
+
+
+
+
+class BreakWithLabelDemo {
+    public static void main(String[] args) {
+
+        int[][] arrayOfInts = { 
+            { 32, 87, 3, 589 },
+            { 12, 1076, 2000, 8 },
+            { 622, 127, 77, 955 }
+        };
+        int searchfor = 12;
+
+        int i;
+        int j = 0;
+        boolean foundIt = false;
+
+    search:
+        for (i = 0; i < arrayOfInts.length; i++) {
+            for (j = 0; j < arrayOfInts[i].length;
+                 j++) {
+                if (arrayOfInts[i][j] == searchfor) {
+                    foundIt = true;
+                    break search;
+                }
+            }
+        }
+
+        if (foundIt) {
+            System.out.println("Found " + searchfor + " at " + i + ", " + j);
+        } else {
+            System.out.println(searchfor + " not in the array");
+        }
+    }
+}
+
+
+
+
+
+
+
+class ContinueDemo {
+    public static void main(String[] args) {
+
+        String searchMe = "peter piper picked a " + "peck of pickled peppers";
+        int max = searchMe.length();
+        int numPs = 0;
+
+        for (int i = 0; i < max; i++) {
+            // interested only in p's
+            if (searchMe.charAt(i) != 'p')
+                continue;
+
+            // process p's
+            numPs++;
+        }
+        System.out.println("Found " + numPs + " p's in the string.");
+    }
+}
+
+
+
+
+The return Statement
+The last of the branching statements is the return statement. The return statement exits from the current method, and control flow returns to where the method was invoked. The return statement has two forms: one that returns a value, and one that doesn't. To return a value, simply put the value (or an expression that calculates the value) after the return keyword.
+
+return ++count;
+The data type of the returned value must match the type of the method's declared return value. When a method is declared void, use the form of return that doesn't return a value.
+
+return;
+
+
+Questions:
+
+Questions
+The most basic control flow statement supported by the Java programming language is the ___ statement.
+The ___ statement allows for any number of possible execution paths.
+The ___ statement is similar to the while statement, but evaluates its expression at the ___ of the loop.
+How do you write an infinite loop using the for statement?
+How do you write an infinite loop using the while statement?
+
+
+
+Classes:
+
+
+
+
+class OuterClass {
+    ...
+    class InnerClass {
+        ...
+    }
+    static class StaticNestedClass {
+        ...
+    }
+}
+A nested class is a member of its enclosing class.
+
+
+
+(Recall that outer classes can only be declared public or package private.)
+
+
+
+Terminology: Nested classes are divided into two categories: non-static and static. Non-static nested classes are called inner classes. Nested classes that are declared static are called static nested classes.
+
+
+
+Why Use Nested Classes?
+Compelling reasons for using nested classes include the following:
+
+It is a way of logically grouping classes that are only used in one place: If a class is useful to only one other class, then it is logical to embed it in that class and keep the two together. Nesting such "helper classes" makes their package more streamlined.
+
+It increases encapsulation: Consider two top-level classes, A and B, where B needs access to members of A that would otherwise be declared private. By hiding class B within class A, A's members can be declared private and B can access them. In addition, B itself can be hidden from the outside world.
+
+It can lead to more readable and maintainable code: Nesting small classes within top-level classes places the code closer to where it is used.
+
+
+
+
+
+
+
+public class OuterClass {
+
+    String outerField = "Outer field";
+    static String staticOuterField = "Static outer field";
+
+    class InnerClass {
+        void accessMembers() {
+            System.out.println(outerField);
+            System.out.println(staticOuterField);
+        }
+    }
+
+    static class StaticNestedClass {
+        void accessMembers(OuterClass outer) {
+            // Compiler error: Cannot make a static reference to the non-static
+            //     field outerField
+            // System.out.println(outerField);
+            System.out.println(outer.outerField);
+            System.out.println(staticOuterField);
+        }
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Inner class:");
+        System.out.println("------------");
+        OuterClass outerObject = new OuterClass();
+        OuterClass.InnerClass innerObject = outerObject.new InnerClass();
+        innerObject.accessMembers();
+
+        System.out.println("\nStatic nested class:");
+        System.out.println("--------------------");
+        StaticNestedClass staticNestedObject = new StaticNestedClass();        
+        staticNestedObject.accessMembers(outerObject);
+        
+        System.out.println("\nTop-level class:");
+        System.out.println("--------------------");
+        TopLevelClass topLevelObject = new TopLevelClass();        
+        topLevelObject.accessMembers(outerObject);                
+    }
+}
+
+
+
+
+TopLevelClass.java
+
+public class TopLevelClass {
+
+    void accessMembers(OuterClass outer) {     
+        // Compiler error: Cannot make a static reference to the non-static
+        //     field OuterClass.outerField
+        // System.out.println(OuterClass.outerField);
+        System.out.println(outer.outerField);
+        System.out.println(OuterClass.staticOuterField);
+    }  
+}
+
+
+create an arrya:
+ // Create an array
+    private final static int SIZE = 15;
+    private int[] arrayOfInts = new int[SIZE];
+	
+Local and Anonymous Classes
+There are two additional types of inner classes. You can declare an inner class within the body of a method. These classes are known as local classes. You can also declare an inner class within the body of a method without naming the class. These classes are known as anonymous classes.
+
+
+Modifiers
+You can use the same modifiers for inner classes that you use for other members of the outer class. For example, you can use the access specifiers private, public, and protected to restrict access to inner classes, just as you use them to restrict access do to other class members.
+
+
+
+innerclass:
+
+public class LocalClassExample {
+  
+    static String regularExpression = "[^0-9]";
+  
+    public static void validatePhoneNumber(
+        String phoneNumber1, String phoneNumber2) {
+      
+        final int numberLength = 10;
+        
+        // Valid in JDK 8 and later:
+       
+        // int numberLength = 10;
+       
+        class PhoneNumber {
+            
+            String formattedPhoneNumber = null;
+
+            PhoneNumber(String phoneNumber){
+                // numberLength = 7;
+                String currentNumber = phoneNumber.replaceAll(
+                  regularExpression, "");
+                if (currentNumber.length() == numberLength)
+                    formattedPhoneNumber = currentNumber;
+                else
+                    formattedPhoneNumber = null;
+            }
+
+            public String getNumber() {
+                return formattedPhoneNumber;
+            }
+            
+            // Valid in JDK 8 and later:
+
+//            public void printOriginalNumbers() {
+//                System.out.println("Original numbers are " + phoneNumber1 +
+//                    " and " + phoneNumber2);
+//            }
+        }
+
+        PhoneNumber myNumber1 = new PhoneNumber(phoneNumber1);
+        PhoneNumber myNumber2 = new PhoneNumber(phoneNumber2);
+        
+        // Valid in JDK 8 and later:
+
+//        myNumber1.printOriginalNumbers();
+
+        if (myNumber1.getNumber() == null) 
+            System.out.println("First number is invalid");
+        else
+            System.out.println("First number is " + myNumber1.getNumber());
+        if (myNumber2.getNumber() == null)
+            System.out.println("Second number is invalid");
+        else
+            System.out.println("Second number is " + myNumber2.getNumber());
+
+    }
+
+    public static void main(String... args) {
+        validatePhoneNumber("123-456-7890", "456-7890");
+    }
+}
+
+Lambda:
+
+Calculator:
+
+
+
+
+public class Calculator {
+  
+    interface IntegerMath {
+        int operation(int a, int b);   
+    }
+  
+    public int operateBinary(int a, int b, IntegerMath op) {
+        return op.operation(a, b);
+    }
+ 
+    public static void main(String... args) {
+    
+        Calculator myApp = new Calculator();
+        IntegerMath addition = (a, b) -> a + b;
+        IntegerMath subtraction = (a, b) -> a - b;
+        System.out.println("40 + 2 = " +
+            myApp.operateBinary(40, 2, addition));
+        System.out.println("20 - 10 = " +
+            myApp.operateBinary(20, 10, subtraction));    
+    }
+}
+	
+
+
+
+
+I/O Streams
+Byte Streams handle I/O of raw binary data.
+Character Streams handle I/O of character data, automatically handling translation to and from the local character set.
+Buffered Streams optimize input and output by reducing the number of calls to the native API.
+Scanning and Formatting allows a program to read and write formatted text.
+I/O from the Command Line describes the Standard Streams and the Console object.
+Data Streams handle binary I/O of primitive data type and String values.
+Object Streams handle binary I/O of objects.
+
+
+
+
+
+
+
+
+
+What Is an Exception?
+The Catch or Specify Requirement
+How to Throw Exceptions
+The try-with-resources Statement
+Unchecked Exceptions — The Controversy
+Advantages of Exceptions
+
+
+Summary
+A program can use exceptions to indicate that an error occurred. To throw an exception, use the throw statement and provide it with an exception object — a descendant of Throwable — to provide information about the specific error that occurred. A method that throws an uncaught, checked exception must include a throws clause in its declaration.
+
+A program can catch exceptions by using a combination of the try, catch, and finally blocks.
+
+The try block identifies a block of code in which an exception can occur.
+The catch block identifies a block of code, known as an exception handler, that can handle a particular type of exception.
+The finally block identifies a block of code that is guaranteed to execute, and is the right place to close files, recover resources, and otherwise clean up after the code enclosed in the try block.
+The try statement should contain at least one catch block or a finally block and may have multiple catch blocks.
+
+The class of the exception object indicates the type of exception thrown. The exception object can contain further information about the error, including an error message. With exception chaining, an exception can point to the exception that caused it, which can in turn point to the exception that caused it, and so on.
+
+
+
+Error Class
+When a dynamic linking failure or other hard failure in the Java virtual machine occurs, the virtual machine throws an Error. Simple programs typically do not catch or throw Errors.
+
+Exception Class
+Most programs throw and catch objects that derive from the Exception class. An Exception indicates that a problem occurred, but it is not a serious system problem. Most programs you write will throw and catch Exceptions as opposed to Errors.
+
+The Java platform defines the many descendants of the Exception class. These descendants indicate various types of exceptions that can occur. For example, IllegalAccessException signals that a particular method could not be found, and NegativeArraySizeException indicates that a program attempted to create an array with a negative size.
+
+One Exception subclass, RuntimeException, is reserved for exceptions that indicate incorrect use of an API. An example of a runtime exception is NullPointerException, which occurs when a method tries to access a member of an object through a null reference. The section Unchecked Exceptions — The Controversy discusses why most applications shouldn't throw runtime exceptions or subclass RuntimeException.
+
+
+When an error occurs within a method, the method creates an object and hands it off to the runtime system. The object, called an exception object, contains information about the error, including its type and the state of the program when the error occurred. Creating an exception object and handing it to the runtime system is called throwing an exception.
+
+
+
+
+
+
+Runtime exceptions are not subject to the Catch or Specify Requirement. Runtime exceptions are those indicated by RuntimeException and its subclasses.
+
+Errors and runtime exceptions are collectively known as unchecked exceptions.
+
+Exception:
+
+
+import java.io.*;
+import java.util.List;
+import java.util.ArrayList;
+
+public class ListOfNumbers {
+
+    private List<Integer> list;
+    private static final int SIZE = 10;
+
+    public ListOfNumbers () {
+        list = new ArrayList<Integer>(SIZE);
+        for (int i = 0; i < SIZE; i++) {
+            list.add(new Integer(i));
+        }
+    }
+
+    public void writeList() {
+	// The FileWriter constructor throws IOException, which must be caught.
+        PrintWriter out = new PrintWriter(new FileWriter("OutFile.txt"));
+
+        for (int i = 0; i < SIZE; i++) {
+            // The get(int) method throws IndexOutOfBoundsException, which must be caught.
+            out.println("Value at: " + i + " = " + list.get(i));
+        }
+        out.close();
+    }
+}
+
+
+
+Byte streams
+
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+public class CopyBytes {
+    public static void main(String[] args) throws IOException {
+
+        FileInputStream in = null;
+        FileOutputStream out = null;
+
+        try {
+            in = new FileInputStream("xanadu.txt");
+            out = new FileOutputStream("outagain.txt");
+            int c;
+
+            while ((c = in.read()) != -1) {
+                out.write(c);
+            }
+        } finally {
+            if (in != null) {
+                in.close();
+            }
+            if (out != null) {
+                out.close();
+            }
+        }
+    }
+}
+
+
+
+
+https://docs.oracle.com/javase/tutorial/essential/io/charstreams.html
+
+Buffered input streams read data from a memory area known as a buffer; the native input API is called only when the buffer is empty. Similarly, buffered output streams write data to a buffer, and the native output API is called only when the buffer is full.
+
+A program can convert an unbuffered stream into a buffered stream using the wrapping idiom we've used several times now, where the unbuffered stream object is passed to the constructor for a buffered stream class. Here's how you might modify the constructor invocations in the CopyCharacters example to use buffered I/O:
+
+inputStream = new BufferedReader(new FileReader("xanadu.txt"));
+outputStream = new BufferedWriter(new FileWriter("characteroutput.txt"));
+
+
+
+Programming I/O often involves translating to and from the neatly formatted data humans like to work with. To assist you with these chores, the Java platform provides two APIs. The scanner API breaks input into individual tokens associated with bits of data. The formatting API assembles data into nicely formatted, human-readable form.
+
+buffer empty -> ok take as like a continer - take input from user/file - that means read
+buffer full -> ok completely written -> write.
+
+The java.nio.file package provides extensive support for file and file system I/O. This is a very comprehensive API, but the key entry points are as follows:
+
+The Path class has methods for manipulating a path.
+The Files class has methods for file operations, such as moving, copy, deleting, and also methods for retrieving and setting file attributes.
+The FileSystem class has a variety of methods for obtaining information about the file system.
+
+
+
+
+
+https://docs.oracle.com/javase/tutorial/essential/io/QandE/CountLetter.java

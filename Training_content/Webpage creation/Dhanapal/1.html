@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Project 2 - Web Page Creation</title>
+    <link rel="stylesheet" href="2.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="navbar-nav">
+            <a class="nav-link active" href="#userInformationSection">User Information</a>
+            <a class="nav-link" href="#taskListSection">Task List</a>
+            <a class="nav-link" href="#dateTimeDisplaySection">Date/Time</a>
+        </div>
+    </div>
+
+    <div class="content">
+        <main role="main" class="col-md-12 ml-sm-auto col-lg-12 px-md-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">User Page</h1>
+            </div>
+
+            <div class="row-flex">
+                <div id="userInformationSection" class="form-section">
+                    <h2>Enter User Information</h2>
+                    <form id="userForm">
+                        <div class="form-group">
+                            <label for="userName">Name</label>
+                            <input type="text" class="form-control" id="userName" placeholder="Enter your name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="userCity">City</label>
+                            <input type="text" class="form-control" id="userCity" placeholder="Enter your city" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+
+                <div id="dateTimeDisplaySection" class="date-time-section">
+                    <div>
+                        <h2 style="text-align: center;">Date/Time</h2>
+                        <p id="dateTimeDisplay"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="taskListSection" class="task-section">
+                <h2>Task List</h2>
+                <form id="taskForm" onsubmit="return false;">
+                    <div class="form-group">
+                        <label for="taskName">Task Name</label>
+                        <input type="text" class="form-control" id="taskName" placeholder="Enter task name" required>
+                    </div>
+                    <div class="priority-buttons">
+                        <button class="btn btn-danger" onclick="addTask('P1')">P1 High Priority</button>
+                        <button class="btn btn-warning" onclick="addTask('P2')">P2 Medium Priority</button>
+                        <button class="btn btn-info" onclick="addTask('P3')">P3 Medium Priority</button>
+                        <button class="btn btn-success" onclick="addTask('P4')">P4 Low Priority</button>
+                    </div>
+                </form>
+                <table class="table table-bordered">
+                    <thead id="tableHead">
+                        <tr>
+                            <th>Task</th>
+                            <th>Priority</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="taskTableBody">
+                        <!-- Task rows will be added here dynamically -->
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="3.js"></script>
+</body>
+</html>
